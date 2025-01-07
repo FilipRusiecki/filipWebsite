@@ -9,7 +9,7 @@ import AppBanner from 'src/components/AppBanner/AppBanner';
 const HomePage = () => {
   return (
     <>
-	  <div className="container mx-auto bg-black">
+	  <div className="container mx-auto ">
 			<AppBanner></AppBanner>
 
 			{/* <ProjectsProvider>
