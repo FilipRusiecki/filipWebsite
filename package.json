@@ -8,7 +8,8 @@
   },
   "devDependencies": {
     "@redwoodjs/core": "8.4.2",
-    "@redwoodjs/project-config": "8.4.2"
+    "@redwoodjs/project-config": "8.4.2",
+    "prettier-plugin-tailwindcss": "^0.5.12"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config",
@@ -23,5 +24,9 @@
   "packageManager": "yarn@4.4.0",
   "resolutions": {
     "@storybook/react-dom-shim@npm:7.6.17": "https://verdaccio.tobbe.dev/@storybook/react-dom-shim/-/react-dom-shim-8.0.8.tgz"
+  },
+  "dependencies": {
+    "framer-motion": "^11.16.0",
+    "react-icon": "^1.0.0"
   }
 }
