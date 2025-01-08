@@ -11,7 +11,7 @@ const Contact = () => {
           duration: 1.0,
           delay: 0.1,
         }}
-        className="font-general-semibold text-ternary-dark dark:text-primary-light text-center text-2xl sm:text-center lg:text-3xl xl:text-4xl"
+        className="font-general-semibold text-ternary-dark dark:text-primary-light mt-40 bg-slate-100 text-center text-2xl sm:text-center lg:text-3xl xl:text-4xl"
       >
         Email: fifuniek080@gmail.com
       </motion.h1>
