@@ -12,7 +12,6 @@ const HomePage = () => {
       <div className="container mx-auto">
         <AppBanner></AppBanner>
         <Projects></Projects>
-
         <Contact></Contact>
 
         {/* <ProjectsProvider>
