@@ -8,7 +8,7 @@ import Projects from 'src/components/Projects/Projects'
 
 const HomePage = () => {
   return (
-    <>
+    <div className="">
       <div className="container mx-auto">
         <AppBanner></AppBanner>
         <Projects></Projects>
@@ -18,7 +18,7 @@ const HomePage = () => {
 				<ProjectsGrid></ProjectsGrid>
 			</ProjectsProvider> */}
       </div>
-    </>
+    </div>
   )
 }
 

@@ -24,7 +24,7 @@ const Projects = () => {
           aria-label="Flow Algorithm with Heat Map"
           href="https://github.com/FilipRusiecki/ProjectsToShow/tree/main/FlowAlgorithmWithHeatMap "
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black  bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
                 src={flowAlgo}
@@ -49,7 +49,7 @@ const Projects = () => {
           aria-label="Fuzzy logic"
           href="https://github.com/FilipRusiecki/ProjectsToShow/tree/main/FuzzyLogic"
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
                 src={fuzzy}
@@ -74,7 +74,7 @@ const Projects = () => {
           aria-label="AI behaviours"
           href="https://github.com/FilipRusiecki/ProjectsToShow/tree/main/SimpleAIBehaviours"
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black  bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
                 src={Aipic}
@@ -99,7 +99,7 @@ const Projects = () => {
           aria-label="MultiPlayer VR Game"
           href=" https://github.com/FilipRusiecki/FinalYearProject"
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black  bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
                 src={vrpic}
@@ -124,7 +124,7 @@ const Projects = () => {
           aria-label="Minecraft Modification"
           href="https://mcreator.net/modification/99286/anywhereyoogo		"
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black  bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
                 src={mcpic}
@@ -151,7 +151,7 @@ const Projects = () => {
           aria-label="Zombie gamemode for Counter:Strike 2 Game"
           href="https://steamcommunity.com/sharedfiles/filedetails/?id=3171183590	"
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black  bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
                 src={zhill}
@@ -177,7 +177,7 @@ const Projects = () => {
           aria-label="Map for Counter:Strike 2 Game"
           href="https://steamcommunity.com/sharedfiles/filedetails/?id=3169731504"
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black  bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
                 src={frugo}
@@ -203,7 +203,7 @@ const Projects = () => {
           aria-label="Map for Counter:Strike 2 Game"
           href="https://steamcommunity.com/sharedfiles/filedetails/?id=2303607674 "
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black  bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img src={chr} className="rounded-t-xl border-none" alt="chr" />
               <div className="px-4 py-6 text-center">
@@ -225,7 +225,7 @@ const Projects = () => {
           aria-label="Gun Skin for Counter:Strike 2 Game"
           href="https://steamcommunity.com/sharedfiles/filedetails/?id=3171183590	"
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
                 src={famas}
@@ -251,7 +251,7 @@ const Projects = () => {
           aria-label="Gun Skin for Counter:Strike 2 Game"
           href="https://steamcommunity.com/sharedfiles/filedetails/?id=3171183590	"
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
                 src={p250wg}
@@ -277,7 +277,7 @@ const Projects = () => {
           aria-label="Gun Skin for Counter:Strike 2 Game"
           href="https://steamcommunity.com/sharedfiles/filedetails/?id=3171183590	"
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img src={m4wg} className="rounded-t-xl border-none" alt="m4wg" />
               <div className="px-4 py-6 text-center">
@@ -299,7 +299,7 @@ const Projects = () => {
           aria-label="Gun Skin for Counter:Strike 2 Game"
           href="https://steamcommunity.com/sharedfiles/filedetails/?id=3171183590	"
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img src={m4bg} className="rounded-t-xl border-none" alt="m4bg" />
               <div className="px-4 py-6 text-center">
@@ -321,7 +321,7 @@ const Projects = () => {
           aria-label="Gun Skin for Counter:Strike 2 Game"
           href="https://steamcommunity.com/sharedfiles/filedetails/?id=3171183590	"
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img src={m4pb} className="rounded-t-xl border-none" alt="m4pb" />
               <div className="px-4 py-6 text-center">
@@ -343,7 +343,7 @@ const Projects = () => {
           aria-label="Gun Skin for Counter:Strike 2 Game"
           href="https://steamcommunity.com/sharedfiles/filedetails/?id=3171183590	"
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img src={m4gw} className="rounded-t-xl border-none" alt="m4gw" />
               <div className="px-4 py-6 text-center">
@@ -365,7 +365,7 @@ const Projects = () => {
           aria-label="Gun Skin for Counter:Strike 2 Game"
           href="https://steamcommunity.com/sharedfiles/filedetails/?id=3171183590	"
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img src={m4g} className="rounded-t-xl border-none" alt="Zm4g" />
               <div className="px-4 py-6 text-center">
@@ -387,7 +387,7 @@ const Projects = () => {
           aria-label="Gun Skin for Counter:Strike 2 Game"
           href="https://steamcommunity.com/sharedfiles/filedetails/?id=3171183590	"
         >
-          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
+          <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl border-2 border-solid border-black bg-slate-100 shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
                 src={m4bg}
