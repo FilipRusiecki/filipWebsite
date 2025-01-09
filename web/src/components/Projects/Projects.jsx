@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 
 const Projects = () => {
   return (
-    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3">
+    <div className="ml-5 mr-5 mt-6 grid grid-cols-1 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3">
       <div>
         <a
           aria-label="Flow Algorithm with Heat Map"
