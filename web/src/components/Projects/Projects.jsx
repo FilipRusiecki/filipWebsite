@@ -1,5 +1,12 @@
 import { motion } from 'framer-motion'
 
+import zhill from './2.jpg'
+import Aipic from './ai.png'
+import mcpic from './Dimension.png'
+import flowAlgo from './FlowAlgorithmWithHeatmap.png'
+import fuzzy from './fuzzy.png'
+import vrpic from './VR3.png'
+
 const Projects = () => {
   return (
     <div className="ml-5 mr-5 mt-6 grid grid-cols-1 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3">
@@ -11,8 +18,8 @@ const Projects = () => {
           <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
-                src="/static/media/web-project-2.f0108702.jpg"
-                className="rounded-t-xl border-none"
+                src={flowAlgo}
+                className="rounded-t-x1 border-none"
                 alt="Flow Algorithm with Heat Map"
               />
               <div className="px-4 py-6 text-center">
@@ -36,7 +43,7 @@ const Projects = () => {
           <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
-                src="/static/media/mobile-project-2.a5aae786.jpg"
+                src={fuzzy}
                 className="rounded-t-xl border-none"
                 alt="Fuzzy logic"
               />
@@ -61,7 +68,7 @@ const Projects = () => {
           <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
-                src="/static/media/ui-project-1.41def4d8.jpg"
+                src={Aipic}
                 className="rounded-t-xl border-none"
                 alt="AI behaviours"
               />
@@ -86,7 +93,7 @@ const Projects = () => {
           <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
-                src="/static/media/ui-project-2.d2891914.jpg"
+                src={vrpic}
                 className="rounded-t-xl border-none"
                 alt="MultiPlayer VR Game"
               />
@@ -111,7 +118,7 @@ const Projects = () => {
           <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
-                src="/static/media/mobile-project-1.0aa0cb76.jpg"
+                src={mcpic}
                 className="rounded-t-xl border-none"
                 alt="Minecraft Modification"
               />
@@ -138,7 +145,7 @@ const Projects = () => {
           <div className="bg-secondary-light dark:bg-ternary-dark mb-10 cursor-pointer rounded-xl shadow-lg hover:shadow-xl sm:mb-0">
             <div>
               <img
-                src="/static/media/web-project-1.dbc2198e.jpg"
+                src={zhill}
                 className="rounded-t-xl border-none"
                 alt="Zombie gamemode for Counter:Strike 2 Game"
               />
