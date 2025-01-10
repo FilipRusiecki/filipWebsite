@@ -7,7 +7,7 @@ import './index.css'
 
 const App = ({ children }) => (
   <FatalErrorBoundary page={FatalErrorPage}>
-    <RedwoodProvider titleTemplate="%PageTitle | %AppTitle">
+    <RedwoodProvider titleTemplate="Filip Rusiecki">
       <RedwoodApolloProvider>{children}</RedwoodApolloProvider>
     </RedwoodProvider>
   </FatalErrorBoundary>
