@@ -24,19 +24,6 @@ const AppBanner = () => {
           Hi, I'm Filip
         </motion.h1>
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: -180 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ ease: 'easeInOut', duration: 0.9, delay: 0.2 }}
-        className="float-right mt-8 w-full text-right sm:mt-0 sm:w-2/3"
-      >
-        {/* <img
-					src={
-						activeTheme === 'dark' ? developerLight : developerDark
-					}
-					alt="Developer"
-				/> */}
-      </motion.div>
     </motion.section>
   )
 }

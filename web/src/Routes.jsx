@@ -13,8 +13,11 @@ const Routes = () => {
   return (
     <Router>
       <Route path="/" page={HomePage} name="home" />
-      <Route path="/home" page={HomePage} name="home" />
-      <Route path="/splash" page={SplashPage} name="splash" />
+      <Route path="/updates" page={UpdatesPage} name="updates" />
+      <Route path="/faq" page={FAQPage} name="faq" />
+      <Route path="/about" page={AboutPage} name="about" />
+      <Route path="/support" page={SupportPage} name="support" />
+      <Route path="/support/{id:Int}" page={SupportPage} name="supportTicket" />
       <Route notfound page={NotFoundPage} />
     </Router>
   )

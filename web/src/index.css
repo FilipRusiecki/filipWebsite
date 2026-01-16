@@ -11,3 +11,8 @@
 /**
  * END --- SETUP TAILWINDCSS EDIT
  */
+
+/* Global styles */
+body {
+  @apply bg-game-dark text-game-light;
+}

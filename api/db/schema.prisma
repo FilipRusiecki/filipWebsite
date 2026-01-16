@@ -14,11 +14,35 @@ generator client {
   binaryTargets = "native"
 }
 
-// Define your own datamodels here and run `yarn redwood prisma migrate dev`
-// to create migrations for them and apply to your dev DB.
-// TODO: Please remove the following example:
-model UserExample {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+// Support Ticket System
+model Ticket {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String
+  email       String?
+  status      String    @default("open") // open, in_progress, resolved, closed
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  replies     Reply[]
+}
+
+model Reply {
+  id        Int      @id @default(autoincrement())
+  ticketId  Int
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  content   String
+  isAdmin   Boolean  @default(false) // true for developer responses
+  createdAt DateTime @default(now())
+}
+
+// Updates / Patch Notes System
+model Update {
+  id          Int      @id @default(autoincrement())
+  title       String
+  version     String?  // e.g., "1.0.0", "Early Access 0.5"
+  content     String   // Full patch notes content (markdown or HTML)
+  summary     String?  // Short summary for homepage preview
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
