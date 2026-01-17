@@ -5,28 +5,33 @@ import Navigation from 'src/components/Navigation/Navigation'
 import Footer from 'src/components/Footer/Footer'
 
 const AboutPage = () => {
-  // Placeholder team members - easily expandable
   const teamMembers = [
     {
-      name: 'Team Member 1',
-      role: 'Developer & Co-Founder',
-      image: 'https://via.placeholder.com/300x300/252325/D1AD4A?text=Team+Member+1',
+      name: 'Filip',
+      alias: 'FIFI',
+      role: 'Founder / Developer',
+      image: '/images/developers/Founder Developer/pp.jpg',
       description:
-        'Placeholder description for team member 1. This section will be updated with actual team member information, including their background, role in the project, and personal message to the community.',
+        'Filip is the founder and lead developer behind the project. He has been passionate about video games since a young age and sees game development as a way to escape reality, immerse himself in creative worlds, and express himself. While he deeply enjoys making games, he also loves playing them, drawing inspiration from the experiences they create.',
+      flag: null,
     },
     {
-      name: 'Team Member 2',
-      role: 'Developer & Co-Founder',
-      image: 'https://via.placeholder.com/300x300/252325/D1AD4A?text=Team+Member+2',
+      name: 'Dawid',
+      alias: 'Pathfinder',
+      role: 'Developer',
+      image: '/images/developers/Developer/boss.jpg',
       description:
-        'Placeholder description for team member 2. This section will be updated with actual team member information, including their background, role in the project, and personal message to the community.',
+        'I like gaming and other forms of media. Love playing and watching football. I am passionate about games and writing. I hope I can combine those two for a job I\'ll love doing. In my free time I spend time doing small passion projects of mine such as small games, some writing, designing skins for Counter Strike and beyond that just spending time with my friends and family. 🙂',
+      flag: '🇵🇱',
     },
     {
-      name: 'Team Member 3',
-      role: 'Contributor',
-      image: 'https://via.placeholder.com/300x300/252325/D1AD4A?text=Team+Member+3',
+      name: 'Ben',
+      alias: 'Bennie',
+      role: '3D Model Artist',
+      image: '/images/developers/3d modeling artist/content.png',
       description:
-        'Placeholder description for team member 3. This section will be updated with actual team member information, including their background, role in the project, and personal message to the community.',
+        'I love creating digitaly, both 2D and 3D. I literaly cannot stop thinking about games and cars, all i want is to play /create / own cool games and cars. I want to constantly keep learning to get better at what i do and hopefully it shows in my work. The only time you fail, is when you give up',
+      flag: null,
     },
   ]
 
@@ -69,10 +74,22 @@ const AboutPage = () => {
                       alt={member.name}
                       className="w-48 h-48 rounded-full mx-auto mb-4 object-cover border-4 border-game-accent/30"
                     />
-                    <h3 className="text-2xl font-bold text-game-light mb-2">{member.name}</h3>
+                    <div className="flex items-center justify-center gap-2 mb-2">
+                      <h3 className="text-2xl font-bold text-game-light">{member.name}</h3>
+                      {member.flag && (
+                        <span className="text-2xl" title="Poland" aria-label="Polish flag">
+                          {member.flag}
+                        </span>
+                      )}
+                    </div>
+                    {member.alias && (
+                      <p className="text-game-light/60 text-sm mb-1">({member.alias})</p>
+                    )}
                     <p className="text-game-accent font-semibold">{member.role}</p>
                   </div>
-                  <p className="text-game-light/80 leading-relaxed">{member.description}</p>
+                  <p className="text-game-light/80 leading-relaxed whitespace-pre-wrap">
+                    {member.description}
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -86,7 +103,7 @@ const AboutPage = () => {
               <div className="bg-game-dark border-2 border-game-accent/30 rounded-lg p-8 max-w-3xl mx-auto">
                 <h2 className="text-3xl font-bold text-game-light mb-4">Our Story</h2>
                 <p className="text-game-light/80 leading-relaxed mb-4">
-                  Play With Friends is being developed by two passionate developers alongside
+                  Play With Friends is being developed by three passionate developers alongside
                   contributors, while balancing full-time jobs. We're committed to creating a
                   game that brings friends together for chaotic, fun adventures.
                 </p>

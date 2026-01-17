@@ -18,7 +18,7 @@ const WishlistCTA = () => {
             supports development, and shows Steam that there's interest in our chaotic adventure.
           </p>
           <p className="text-lg mb-10 text-game-dark/90">
-            The game is planned for Early Access in early 2026. We're two passionate developers working alongside
+            The game is planned for Early Access in early 2026. We're three passionate developers working alongside
             contributors while balancing full-time jobs. Your wishlist helps us build the best game possible!
           </p>
           <motion.a

@@ -16,7 +16,7 @@ const EarlyAccessInfo = () => {
           <div className="space-y-6 text-lg leading-relaxed">
             <p className="text-game-light/90">
               Play With Friends is planned for Early Access in <strong className="text-game-accent">early 2026</strong>.
-              We're two passionate developers working alongside contributors while balancing full-time jobs.
+              We're three passionate developers working alongside contributors while balancing full-time jobs.
             </p>
             <div className="bg-game-dark border-2 border-game-accent/30 rounded-lg p-6 my-8">
               <h3 className="text-2xl font-bold mb-4 text-game-accent">What to Expect:</h3>

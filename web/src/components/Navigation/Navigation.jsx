@@ -34,6 +34,18 @@ const Navigation = () => {
               About
             </Link>
             <Link
+              to={routes.cosmetics()}
+              className="text-game-light hover:text-game-accent transition-colors font-semibold"
+            >
+              Cosmetics
+            </Link>
+            <Link
+              to={routes.achievements()}
+              className="text-game-light hover:text-game-accent transition-colors font-semibold"
+            >
+              Achievements
+            </Link>
+            <Link
               to={routes.support()}
               className="text-game-light hover:text-game-accent transition-colors font-semibold"
             >

@@ -14,17 +14,17 @@ const FAQPage = () => {
     {
       question: 'When will Play With Friends be released?',
       answer:
-        'Play With Friends is planned for Early Access in early 2026. We\'re two passionate developers working alongside contributors while balancing full-time jobs, so development may take longer to ensure quality.',
+        'Play With Friends is planned for Early Access in early 2026. We\'re three passionate developers working alongside contributors while balancing full-time jobs, so development may take longer to ensure quality.',
     },
     {
       question: 'What platforms will the game be available on?',
       answer:
-        'Play With Friends will be available on Steam. We\'re focusing on PC first, with potential for other platforms in the future.',
+        'Play With Friends will be available on Steam. We\'re focusing on PC first, with potential for other platforms in the future. The game requires an internet connection to run on Steam, as the economy system is connected online.',
     },
     {
       question: 'How many players can play together?',
       answer:
-        'Play With Friends supports up to 5 players in co-op multiplayer. You can play with friends or join public games.',
+        'Play With Friends supports up to 5 players in co-op multiplayer. The game is designed for playing with friends or solo - there are no public matchmaking options. You can invite your friends to join your game session.',
     },
     {
       question: 'What makes this game different from other rogue-likes?',
@@ -49,7 +49,12 @@ const FAQPage = () => {
     {
       question: 'Can I play solo, or is multiplayer required?',
       answer:
-        'While the game is designed for multiplayer co-op, solo play will be possible. However, the full experience is best enjoyed with friends.',
+        'You can play solo or with friends (up to 5 players). The game is designed for friends-only multiplayer - there are no public matchmaking options. While solo play is possible, the full experience is best enjoyed with friends.',
+    },
+    {
+      question: 'How can I participate in shaping future updates?',
+      answer:
+        'Community feedback is at the heart of our development! You can vote on future updates and participate in feature selection directly on our website. We actively listen to player suggestions and incorporate community feedback into our development roadmap. Visit our Updates page to see current voting opportunities and share your ideas.',
     },
   ]
 
