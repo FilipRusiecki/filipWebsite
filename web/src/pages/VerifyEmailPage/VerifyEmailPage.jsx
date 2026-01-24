@@ -23,7 +23,9 @@ const VerifyEmailPage = () => {
 
       try {
         // Call the verify email API endpoint
-        const response = await fetch(`/.redwood/functions/verifyEmail?token=${encodeURIComponent(token)}`)
+        // RedwoodJS automatically handles the API path based on redwood.toml apiUrl setting
+        const apiPath = window.location.hostname === 'localhost' ? '/.redwood/functions' : '/api'
+        const response = await fetch(`${apiPath}/verifyEmail?token=${encodeURIComponent(token)}`)
         const data = await response.json()
 
         if (response.ok && data.success) {

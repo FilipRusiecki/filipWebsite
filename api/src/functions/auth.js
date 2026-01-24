@@ -4,6 +4,20 @@ import crypto from 'crypto'
 import { sendVerificationEmail, sendPasswordResetEmail } from 'src/lib/email'
 
 export const handler = async (event, context) => {
+  // Handle CORS preflight requests (OPTIONS)
+  if (event.httpMethod === 'OPTIONS' || event.requestContext?.http?.method === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Max-Age': '86400',
+      },
+      body: '',
+    }
+  }
+
   try {
     // Verify SESSION_SECRET is set
     if (!process.env.SESSION_SECRET) {
