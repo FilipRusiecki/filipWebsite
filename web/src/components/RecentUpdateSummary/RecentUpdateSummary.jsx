@@ -18,6 +18,8 @@ const RECENT_UPDATES_QUERY = gql`
 const RecentUpdateSummary = () => {
   const { data, loading, error } = useQuery(RECENT_UPDATES_QUERY, {
     variables: { limit: 1 },
+    errorPolicy: 'all', // Don't throw on error, just return it
+    fetchPolicy: 'cache-and-network', // Try cache first, then network
   })
 
   if (loading) {

@@ -63,15 +63,31 @@ export const handler = async (event, context) => {
     // logged in. The `user` argument will be the user in the database that
     // matched the username/password.
     //
+    // IMPORTANT: This handler is ONLY called if dbAuth has already verified
+    // the password matches. If password is wrong, dbAuth throws an error before
+    // this handler is called.
+    //
     // If you want to allow this user to log in simply return the user.
     //
     // If you want to prevent someone logging in for another reason (maybe they're
     // suspended, or maybe they haven't verified their email yet), throw an error and
     // it will be returned by the `logIn()` function from `useAuth()`.
     handler: (user) => {
+      // Validate user object exists
+      if (!user || !user.id || !user.email) {
+        console.error('Invalid user object in login handler:', user)
+        throw new Error('Invalid user account. Please contact support.')
+      }
+
       // Check if email is verified (required for all users)
       if (!user.emailVerified) {
         throw new Error('Please verify your email address before logging in. Check your inbox for the verification email.')
+      }
+
+      // Validate role exists
+      if (!user.role) {
+        console.error('User missing role:', user)
+        throw new Error('User account is missing role information. Please contact support.')
       }
 
       // Return user with role included so it's available in getUserMetadata
@@ -83,11 +99,10 @@ export const handler = async (event, context) => {
     },
     errors: {
       usernameOrPasswordMissing: 'Both username and password are required',
-      usernameNotFound: 'Username ${username} not found',
-      // For security reasons you may want to make this the same as the
-      // usernameNotFound error so that a malicious user can't use the error
-      // to narrow down if a username is registered.
-      incorrectPassword: 'Incorrect password for ${username}',
+      usernameNotFound: 'Invalid email or password', // Generic message for security
+      // For security reasons, make this the same as usernameNotFound
+      // so that a malicious user can't use the error to narrow down if a username is registered.
+      incorrectPassword: 'Invalid email or password',
     },
     expires: 60 * 60 * 24 * 7 * 1000, // 7 days
   }

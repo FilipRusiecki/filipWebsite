@@ -111,38 +111,47 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await dbAuthClient.login(credentials)
 
-      // After login, get user metadata
-      // getUserMetadata should return the user data including role (from login handler)
+      // If login fails, dbAuth will throw an error, so if we get here, login succeeded
+      // But we need to verify we got valid user data before marking as authenticated
+
+      // After login, get user metadata to ensure we have the full user object
       let userMetadata = null
       try {
         // Add a small delay to ensure cookie is set
         await new Promise(resolve => setTimeout(resolve, 100))
         userMetadata = await dbAuthClient.getUserMetadata()
       } catch (err) {
-        console.warn('getUserMetadata failed, using login response:', err)
+        console.error('getUserMetadata failed after login:', err)
+        // If we can't get user metadata, the login might not have worked properly
+        throw new Error('Failed to verify login. Please try again.')
       }
 
-      // The login handler returns { id, email, role }
-      // getUserMetadata might return the same or we use the login response
-      const userData = userMetadata || response?.user || response
-
-      if (userData) {
-        // Update state in a single batch to avoid race conditions
-        setCurrentUser({
-          id: userData.id,
-          email: userData.email || credentials.username,
-          role: userData.role || 'admin', // Default to admin if not provided
-        })
-        setIsAuthenticated(true)
-      } else {
-        // Fallback: just mark as authenticated
-        setCurrentUser({ id: response?.id, email: credentials.username, role: 'admin' })
-        setIsAuthenticated(true)
+      // Validate that we have required user data
+      if (!userMetadata || !userMetadata.id || !userMetadata.email) {
+        console.error('Invalid user data received:', userMetadata)
+        throw new Error('Invalid user data received. Please try again.')
       }
+
+      // CRITICAL: Never default to admin role - only use the role from the database
+      if (!userMetadata.role) {
+        console.error('User data missing role:', userMetadata)
+        throw new Error('User account is missing role information. Please contact support.')
+      }
+
+      // Update state only with validated user data
+      setCurrentUser({
+        id: userMetadata.id,
+        email: userMetadata.email,
+        role: userMetadata.role, // Use actual role from database, no fallback
+      })
+      setIsAuthenticated(true)
 
       return response
     } catch (error) {
       console.error('Login error:', error)
+      // Ensure we're not authenticated on error
+      setIsAuthenticated(false)
+      setCurrentUser(null)
       // Extract error message from response if available
       const errorMessage = error.message || error.error || 'Invalid email or password'
       throw new Error(errorMessage)

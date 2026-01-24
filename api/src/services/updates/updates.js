@@ -1,10 +1,16 @@
 import { db } from 'src/lib/db'
 
 export const updates = () => {
-  return db.update.findMany({
-    where: { isPublished: true },
-    orderBy: { createdAt: 'desc' },
-  })
+  try {
+    return db.update.findMany({
+      where: { isPublished: true },
+      orderBy: { createdAt: 'desc' },
+    })
+  } catch (error) {
+    console.error('Error fetching updates:', error)
+    // Return empty array instead of throwing to prevent GraphQL errors
+    return []
+  }
 }
 
 export const update = ({ id }) => {
@@ -14,11 +20,17 @@ export const update = ({ id }) => {
 }
 
 export const recentUpdates = ({ limit = 5 }) => {
-  return db.update.findMany({
-    where: { isPublished: true },
-    orderBy: { createdAt: 'desc' },
-    take: limit,
-  })
+  try {
+    return db.update.findMany({
+      where: { isPublished: true },
+      orderBy: { createdAt: 'desc' },
+      take: limit || 5,
+    })
+  } catch (error) {
+    console.error('Error fetching recent updates:', error)
+    // Return empty array instead of throwing to prevent GraphQL errors
+    return []
+  }
 }
 
 export const createUpdate = ({ input }) => {

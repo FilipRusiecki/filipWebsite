@@ -58,21 +58,33 @@ const AdminLoginPage = () => {
     setError(null)
     setLoading(true)
 
-    try {
-      const response = await logIn({ username: email, password })
-      if (response && response.error) {
-        setError(response.error)
-        setLoading(false)
-      } else {
-        // Login successful - the useEffect will handle navigation when isAuthenticated becomes true
-        // Don't navigate here to avoid race conditions
-        setLoading(false)
-        // Reset navigation flag so useEffect can handle redirect
-        hasNavigated.current = false
-      }
-    } catch (err) {
-      setError(err.message || 'Invalid email or password')
+    // Basic validation
+    if (!email || !email.includes('@')) {
+      setError('Please enter a valid email address')
       setLoading(false)
+      return
+    }
+
+    if (!password || password.length < 1) {
+      setError('Please enter your password')
+      setLoading(false)
+      return
+    }
+
+    try {
+      // logIn will throw an error if login fails
+      await logIn({ username: email.trim(), password })
+      // If we get here, login was successful
+      // The useEffect will handle navigation when isAuthenticated becomes true
+      setLoading(false)
+      // Reset navigation flag so useEffect can handle redirect
+      hasNavigated.current = false
+    } catch (err) {
+      // Login failed - show error message
+      const errorMessage = err.message || 'Invalid email or password'
+      setError(errorMessage)
+      setLoading(false)
+      console.error('Login failed:', err)
     }
   }
 
