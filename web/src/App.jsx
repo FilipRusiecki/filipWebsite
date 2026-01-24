@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { FatalErrorBoundary, RedwoodProvider } from '@redwoodjs/web'
 import { RedwoodApolloProvider } from '@redwoodjs/web/apollo'
+import { AuthProvider } from 'src/auth'
 
 import FatalErrorPage from 'src/pages/FatalErrorPage'
 
@@ -15,7 +16,9 @@ const App = ({ children }) => {
   return (
     <FatalErrorBoundary page={FatalErrorPage}>
       <RedwoodProvider titleTemplate="FRVideoGames">
-        <RedwoodApolloProvider>{children}</RedwoodApolloProvider>
+        <AuthProvider>
+          <RedwoodApolloProvider>{children}</RedwoodApolloProvider>
+        </AuthProvider>
       </RedwoodProvider>
     </FatalErrorBoundary>
   )

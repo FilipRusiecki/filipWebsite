@@ -4,22 +4,49 @@ import { motion, AnimatePresence } from 'framer-motion'
 const ScreenshotGallery = ({ screenshots = [] }) => {
   const [selectedIndex, setSelectedIndex] = useState(null)
 
-  // Placeholder screenshots if none provided
-  const images = screenshots.length > 0
-    ? screenshots
-    : Array.from({ length: 6 }, (_, i) => ({
-        id: i,
-        url: `https://via.placeholder.com/800x450/252325/D1AD4A?text=Screenshot+${i + 1}`,
-        alt: `Game Screenshot ${i + 1}`
-      }))
+  // Real game screenshots
+  const defaultScreenshots = [
+    {
+      id: 1,
+      url: '/images/screenshots/Screenshot_20260121_164451.png',
+      alt: 'Play With Friends - Game Screenshot 1',
+    },
+    {
+      id: 2,
+      url: '/images/screenshots/Screenshot_20260121_164529.png',
+      alt: 'Play With Friends - Game Screenshot 2',
+    },
+    {
+      id: 3,
+      url: '/images/screenshots/Screenshot_20260121_164630.png',
+      alt: 'Play With Friends - Game Screenshot 3',
+    },
+    {
+      id: 4,
+      url: '/images/screenshots/Screenshot_20260121_164707.png',
+      alt: 'Play With Friends - Game Screenshot 4',
+    },
+    {
+      id: 5,
+      url: '/images/screenshots/Screenshot_20260121_164851.png',
+      alt: 'Play With Friends - Game Screenshot 5',
+    },
+    {
+      id: 6,
+      url: '/images/screenshots/Screenshot_20260121_165521.png',
+      alt: 'Play With Friends - Game Screenshot 6',
+    },
+  ]
+
+  const images = screenshots.length > 0 ? screenshots : defaultScreenshots
 
   return (
-    <section className="py-20 bg-game-dark">
+    <section className="py-12 md:py-20 bg-game-dark">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-game-light">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 md:mb-12 text-game-light">
           Game Screenshots
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {images.map((screenshot, index) => (
             <motion.div
               key={screenshot.id || index}
@@ -33,7 +60,8 @@ const ScreenshotGallery = ({ screenshots = [] }) => {
               <img
                 src={screenshot.url}
                 alt={screenshot.alt}
-                className="w-full h-64 object-cover hover:scale-110 transition-transform duration-300"
+                className="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover hover:scale-110 transition-transform duration-300"
+                loading="lazy"
               />
             </motion.div>
           ))}
@@ -53,17 +81,18 @@ const ScreenshotGallery = ({ screenshots = [] }) => {
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1 }}
                 exit={{ scale: 0.8 }}
-                className="relative max-w-6xl max-h-[90vh]"
+                className="relative max-w-6xl max-h-[90vh] w-full"
                 onClick={(e) => e.stopPropagation()}
               >
                 <img
                   src={images[selectedIndex].url}
                   alt={images[selectedIndex].alt}
-                  className="max-w-full max-h-[90vh] object-contain rounded-lg"
+                  className="max-w-full max-h-[90vh] w-full h-auto object-contain rounded-lg"
                 />
                 <button
                   onClick={() => setSelectedIndex(null)}
-                  className="absolute top-4 right-4 bg-game-accent text-game-dark w-10 h-10 rounded-full font-bold text-xl hover:bg-game-accent/90 transition-colors"
+                  className="absolute top-2 right-2 md:top-4 md:right-4 bg-game-accent text-game-dark w-10 h-10 md:w-12 md:h-12 rounded-full font-bold text-xl md:text-2xl hover:bg-game-accent/90 transition-colors flex items-center justify-center"
+                  aria-label="Close"
                 >
                   ×
                 </button>

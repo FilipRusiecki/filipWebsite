@@ -90,6 +90,11 @@ const TicketView = ({ ticket, onUpdate }) => {
             {ticket.status.replace('_', ' ').toUpperCase()}
           </span>
         </div>
+        <div className="flex items-center gap-2 mb-4 flex-wrap">
+          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-game-accent/20 text-game-accent border border-game-accent/50">
+            {ticket.ticketType === 'bug_report' ? '🐛 Bug Report' : '💬 Support'}
+          </span>
+        </div>
         <div className="text-sm text-game-light/60 mb-4">
           <span>Ticket ID: #{ticket.id}</span>
           <span className="mx-2">•</span>
@@ -101,7 +106,69 @@ const TicketView = ({ ticket, onUpdate }) => {
             </>
           )}
         </div>
+
+        {/* Bug Report Specific Information */}
+        {ticket.ticketType === 'bug_report' && (
+          <div className="bg-game-dark border border-game-accent/20 rounded-lg p-4 mb-4 space-y-3">
+            {(ticket.platform || ticket.gameVersion || ticket.severity || ticket.frequency) && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                {ticket.platform && (
+                  <div>
+                    <span className="text-game-light/60">Platform:</span>
+                    <span className="text-game-light ml-2 font-semibold">{ticket.platform}</span>
+                  </div>
+                )}
+                {ticket.gameVersion && (
+                  <div>
+                    <span className="text-game-light/60">Version:</span>
+                    <span className="text-game-light ml-2 font-semibold">{ticket.gameVersion}</span>
+                  </div>
+                )}
+                {ticket.severity && (
+                  <div>
+                    <span className="text-game-light/60">Severity:</span>
+                    <span className="text-game-light ml-2 font-semibold">{ticket.severity}</span>
+                  </div>
+                )}
+                {ticket.frequency && (
+                  <div>
+                    <span className="text-game-light/60">Frequency:</span>
+                    <span className="text-game-light ml-2 font-semibold">{ticket.frequency}</span>
+                  </div>
+                )}
+              </div>
+            )}
+            {ticket.stepsToReproduce && (
+              <div>
+                <h4 className="text-game-accent font-semibold mb-2">Steps to Reproduce:</h4>
+                <p className="text-game-light whitespace-pre-wrap leading-relaxed">
+                  {ticket.stepsToReproduce}
+                </p>
+              </div>
+            )}
+            {ticket.expectedBehavior && (
+              <div>
+                <h4 className="text-game-accent font-semibold mb-2">Expected Behavior:</h4>
+                <p className="text-game-light whitespace-pre-wrap leading-relaxed">
+                  {ticket.expectedBehavior}
+                </p>
+              </div>
+            )}
+            {ticket.actualBehavior && (
+              <div>
+                <h4 className="text-game-accent font-semibold mb-2">Actual Behavior:</h4>
+                <p className="text-game-light whitespace-pre-wrap leading-relaxed">
+                  {ticket.actualBehavior}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+
         <div className="bg-game-dark border border-game-accent/20 rounded-lg p-4">
+          <h4 className="text-game-accent font-semibold mb-2">
+            {ticket.ticketType === 'bug_report' ? 'Additional Details:' : 'Description:'}
+          </h4>
           <p className="text-game-light whitespace-pre-wrap leading-relaxed">
             {ticket.description}
           </p>

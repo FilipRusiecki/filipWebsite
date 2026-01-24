@@ -14,16 +14,44 @@ generator client {
   binaryTargets = "native"
 }
 
+// Authentication - Owner/Admin Users
+model User {
+  id                        Int       @id @default(autoincrement())
+  email                     String    @unique
+  hashedPassword            String
+  salt                      String
+  resetToken                String?
+  resetTokenExpiresAt       DateTime?
+  role                      String    @default("user") // "admin" or "user" - only admins can access admin dashboard
+  emailVerified             Boolean   @default(false)
+  verificationToken         String?
+  verificationTokenExpiresAt DateTime?
+  createdAt                 DateTime  @default(now())
+  updatedAt                 DateTime  @updatedAt
+  tickets                   Ticket[]  // Tickets created by this user (if logged in)
+}
+
 // Support Ticket System
 model Ticket {
-  id          Int       @id @default(autoincrement())
-  title       String
-  description String
-  email       String?
-  status      String    @default("open") // open, in_progress, resolved, closed
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  replies     Reply[]
+  id                Int       @id @default(autoincrement())
+  title             String
+  description       String
+  email             String?   // Email for anonymous tickets
+  userId            Int?      // User ID if ticket was created by logged-in user
+  user              User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  ticketType        String    @default("support") // support, bug_report
+  status            String    @default("open") // open, in_progress, resolved, closed
+  // Bug Report Specific Fields
+  gameVersion       String?  // Version of the game where bug occurred
+  platform          String?  // Windows, Mac, Linux
+  stepsToReproduce  String?  // Steps to reproduce the bug
+  expectedBehavior  String?  // What should have happened
+  actualBehavior    String?  // What actually happened
+  frequency         String?  // Always, Sometimes, Once
+  severity          String?  // Critical, High, Medium, Low
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  replies           Reply[]
 }
 
 model Reply {

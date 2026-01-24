@@ -6,10 +6,26 @@ export const schema = gql`
     title: String!
     description: String!
     email: String
+    userId: Int
+    user: User
+    ticketType: String!
     status: String!
+    gameVersion: String
+    platform: String
+    stepsToReproduce: String
+    expectedBehavior: String
+    actualBehavior: String
+    frequency: String
+    severity: String
     createdAt: DateTime!
     updatedAt: DateTime!
     replies: [Reply!]!
+  }
+
+  type User {
+    id: Int!
+    email: String!
+    role: String!
   }
 
   type Reply {
@@ -22,7 +38,9 @@ export const schema = gql`
   }
 
   type Query {
-    tickets: [Ticket!]! @skipAuth
+    tickets: [Ticket!]! @requireAuth(roles: ["admin"])
+    # Individual ticket viewing is public (users can view their own ticket by ID)
+    # But we'll add email verification in the service layer
     ticket(id: Int!): Ticket @skipAuth
   }
 
@@ -30,6 +48,14 @@ export const schema = gql`
     title: String!
     description: String!
     email: String
+    ticketType: String
+    gameVersion: String
+    platform: String
+    stepsToReproduce: String
+    expectedBehavior: String
+    actualBehavior: String
+    frequency: String
+    severity: String
   }
 
   input CreateReplyInput {
@@ -43,9 +69,15 @@ export const schema = gql`
     status: String!
   }
 
+  input AdminReplyInput {
+    ticketId: Int!
+    content: String!
+  }
+
   type Mutation {
     createTicket(input: CreateTicketInput!): Ticket! @skipAuth
     createReply(input: CreateReplyInput!): Reply! @skipAuth
-    updateTicketStatus(input: UpdateTicketStatusInput!): Ticket! @skipAuth
+    updateTicketStatus(input: UpdateTicketStatusInput!): Ticket! @requireAuth(roles: ["admin"])
+    adminReply(input: AdminReplyInput!): Reply! @requireAuth(roles: ["admin"])
   }
 `

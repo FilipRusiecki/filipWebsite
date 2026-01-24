@@ -34,7 +34,14 @@ const TicketList = ({ tickets }) => {
           className="block bg-game-dark border-2 border-game-accent/30 rounded-lg p-6 hover:border-game-accent transition-all duration-300"
         >
           <div className="flex items-start justify-between mb-3">
-            <h3 className="text-xl font-bold text-game-light flex-1">{ticket.title}</h3>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xs font-semibold text-game-accent">
+                  {ticket.ticketType === 'bug_report' ? '🐛' : '💬'}
+                </span>
+                <h3 className="text-xl font-bold text-game-light">{ticket.title}</h3>
+              </div>
+            </div>
             <span
               className={`px-3 py-1 rounded-full text-sm font-semibold border-2 ${getStatusColor(
                 ticket.status

@@ -3,7 +3,7 @@ import { useMutation } from '@redwoodjs/web'
 import { gql } from '@redwoodjs/web'
 
 const CREATE_TICKET = gql`
-  mutation CreateTicketMutation($input: CreateTicketInput!) {
+  mutation CreateSupportTicketMutation($input: CreateTicketInput!) {
     createTicket(input: $input) {
       id
       title
@@ -51,6 +51,7 @@ const TicketForm = ({ onSuccess }) => {
           title: title.trim(),
           description: description.trim(),
           email: email.trim() || null,
+          ticketType: 'support',
         },
       },
     })

@@ -16,11 +16,25 @@ const RECENT_UPDATES_QUERY = gql`
 `
 
 const RecentUpdateSummary = () => {
-  const { data, loading } = useQuery(RECENT_UPDATES_QUERY, {
+  const { data, loading, error } = useQuery(RECENT_UPDATES_QUERY, {
     variables: { limit: 1 },
   })
 
   if (loading) {
+    return null
+  }
+
+  if (error) {
+    // Don't log errors if API server is just starting up
+    const isApiNotReady =
+      error.message?.includes('not available') ||
+      error.message?.includes('reloading') ||
+      error.networkError?.message?.includes('ECONNREFUSED') ||
+      error.networkError?.code === 'ECONNREFUSED'
+
+    if (!isApiNotReady) {
+      console.error('Error fetching recent updates:', error)
+    }
     return null
   }
 

@@ -4625,6 +4625,45 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@redwoodjs/auth-dbauth-api@npm:8.9.0":
+  version: 8.9.0
+  resolution: "@redwoodjs/auth-dbauth-api@npm:8.9.0"
+  dependencies:
+    "@redwoodjs/project-config": "npm:8.9.0"
+    base64url: "npm:3.0.1"
+    md5: "npm:2.3.0"
+    uuid: "npm:10.0.0"
+  checksum: 10c0/4ed3f03b3b7209ea32e96e88d10769f267397b002baac2221fb3829c318a03d5f94b7a15fac39e2548604ac8b8206f0ec465be521e20f8eb58aa0c394fd6b6bc
+  languageName: node
+  linkType: hard
+
+"@redwoodjs/auth-dbauth-setup@npm:8.9.0":
+  version: 8.9.0
+  resolution: "@redwoodjs/auth-dbauth-setup@npm:8.9.0"
+  dependencies:
+    "@babel/runtime-corejs3": "npm:7.26.10"
+    "@prisma/internals": "npm:5.20.0"
+    "@redwoodjs/cli-helpers": "npm:8.9.0"
+    "@simplewebauthn/browser": "npm:7.4.0"
+    core-js: "npm:3.38.1"
+    prompts: "npm:2.4.2"
+    terminal-link: "npm:2.1.1"
+  checksum: 10c0/13a324304a801654c792591e095887ead9bffabfe6b345bd84832bec0e2d6d8bb473169c9b60b02b963469bdf2e216cb93f076274219a1137b6e5709d26c4eb7
+  languageName: node
+  linkType: hard
+
+"@redwoodjs/auth-dbauth-web@npm:^8.9.0":
+  version: 8.9.0
+  resolution: "@redwoodjs/auth-dbauth-web@npm:8.9.0"
+  dependencies:
+    "@babel/runtime-corejs3": "npm:7.26.10"
+    "@redwoodjs/auth": "npm:8.9.0"
+    "@simplewebauthn/browser": "npm:7.4.0"
+    core-js: "npm:3.38.1"
+  checksum: 10c0/86ffbb20f2cc67649751a69692cc6db6e3711e15ecaa606614e6730fb850d266a1789af19979efea0eb98aa315109ed355ebed3b468b0f96642b58eecde9f3f9
+  languageName: node
+  linkType: hard
+
 "@redwoodjs/auth@npm:8.9.0":
   version: 8.9.0
   resolution: "@redwoodjs/auth@npm:8.9.0"
@@ -5443,6 +5482,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@simplewebauthn/browser@npm:7.4.0":
+  version: 7.4.0
+  resolution: "@simplewebauthn/browser@npm:7.4.0"
+  dependencies:
+    "@simplewebauthn/typescript-types": "npm:^7.4.0"
+  checksum: 10c0/cd69d51511e1bb75603b254b706194e8b7c3849e8f02fcb373cc8bb8c789df803a1bb900de7853c0cc63c0ad81fd56497ca63885638d566137afa387674099ad
+  languageName: node
+  linkType: hard
+
+"@simplewebauthn/typescript-types@npm:^7.4.0":
+  version: 7.4.0
+  resolution: "@simplewebauthn/typescript-types@npm:7.4.0"
+  checksum: 10c0/b7aefd742d2f483531ff96509475571339660addba1f140883d8e489601d6a3a5b1c6759aa5ba27a9da5b502709aee9f060a4d4e57010f32c94eb5c42ef562a3
+  languageName: node
+  linkType: hard
+
 "@sinclair/typebox@npm:^0.27.8":
   version: 0.27.8
   resolution: "@sinclair/typebox@npm:0.27.8"
@@ -5472,6 +5527,13 @@ __metadata:
   dependencies:
     "@sinonjs/commons": "npm:^3.0.0"
   checksum: 10c0/2e2fb6cc57f227912814085b7b01fede050cd4746ea8d49a1e44d5a0e56a804663b0340ae2f11af7559ea9bf4d087a11f2f646197a660ea3cb04e19efc04aa63
+  languageName: node
+  linkType: hard
+
+"@stablelib/base64@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "@stablelib/base64@npm:1.0.1"
+  checksum: 10c0/6330720f021819d19cecfe274111b79a256caa81df478d6b0ae7effc8842b96915b6aeed85926ff05b4d48ec1fc78ad043d928b730ee4e6cc6e8cba6aa097bed
   languageName: node
   linkType: hard
 
@@ -6728,7 +6790,9 @@ __metadata:
   resolution: "api@workspace:api"
   dependencies:
     "@redwoodjs/api": "npm:8.9.0"
+    "@redwoodjs/auth-dbauth-api": "npm:8.9.0"
     "@redwoodjs/graphql-server": "npm:8.9.0"
+    resend: "npm:^6.8.0"
   languageName: unknown
   linkType: soft
 
@@ -7378,6 +7442,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"base64url@npm:3.0.1":
+  version: 3.0.1
+  resolution: "base64url@npm:3.0.1"
+  checksum: 10c0/5ca9d6064e9440a2a45749558dddd2549ca439a305793d4f14a900b7256b5f4438ef1b7a494e1addc66ced5d20f5c010716d353ed267e4b769e6c78074991241
+  languageName: node
+  linkType: hard
+
 "baseline-browser-mapping@npm:^2.9.0":
   version: 2.9.14
   resolution: "baseline-browser-mapping@npm:2.9.14"
@@ -7898,6 +7969,13 @@ __metadata:
   version: 2.1.1
   resolution: "chardet@npm:2.1.1"
   checksum: 10c0/d8391dd412338442b3de0d3a488aa9327f8bcf74b62b8723d6bd0b85c4084d50b731320e0a7c710edb1d44de75969995d2784b80e4c13b004a6c7a0db4c6e793
+  languageName: node
+  linkType: hard
+
+"charenc@npm:0.0.2":
+  version: 0.0.2
+  resolution: "charenc@npm:0.0.2"
+  checksum: 10c0/a45ec39363a16799d0f9365c8dd0c78e711415113c6f14787a22462ef451f5013efae8a28f1c058f81fc01f2a6a16955f7a5fd0cd56247ce94a45349c89877d8
   languageName: node
   linkType: hard
 
@@ -8522,6 +8600,13 @@ __metadata:
     shebang-command: "npm:^2.0.0"
     which: "npm:^2.0.1"
   checksum: 10c0/053ea8b2135caff68a9e81470e845613e374e7309a47731e81639de3eaeb90c3d01af0e0b44d2ab9d50b43467223b88567dfeb3262db942dc063b9976718ffc1
+  languageName: node
+  linkType: hard
+
+"crypt@npm:0.0.2":
+  version: 0.0.2
+  resolution: "crypt@npm:0.0.2"
+  checksum: 10c0/adbf263441dd801665d5425f044647533f39f4612544071b1471962209d235042fb703c27eea2795c7c53e1dfc242405173003f83cf4f4761a633d11f9653f18
   languageName: node
   linkType: hard
 
@@ -10293,6 +10378,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-sha256@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "fast-sha256@npm:1.3.0"
+  checksum: 10c0/87f9e4baa7639576cf60a2b6235c9f436e1a1c52323abbd8a705b5bea8355500acf176f2aed0c14f2ecd6d6007e26151461bab2f27b8953bcca8d9d6b76a86e4
+  languageName: node
+  linkType: hard
+
 "fast-uri@npm:^2.0.0, fast-uri@npm:^2.1.0, fast-uri@npm:^2.2.0":
   version: 2.4.0
   resolution: "fast-uri@npm:2.4.0"
@@ -11713,6 +11805,13 @@ __metadata:
     call-bound: "npm:^1.0.3"
     has-tostringtag: "npm:^1.0.2"
   checksum: 10c0/36ff6baf6bd18b3130186990026f5a95c709345c39cd368468e6c1b6ab52201e9fd26d8e1f4c066357b4938b0f0401e1a5000e08257787c1a02f3a719457001e
+  languageName: node
+  linkType: hard
+
+"is-buffer@npm:~1.1.6":
+  version: 1.1.6
+  resolution: "is-buffer@npm:1.1.6"
+  checksum: 10c0/ae18aa0b6e113d6c490ad1db5e8df9bdb57758382b313f5a22c9c61084875c6396d50bbf49315f5b1926d142d74dfb8d31b40d993a383e0a158b15fea7a82234
   languageName: node
   linkType: hard
 
@@ -13534,6 +13633,17 @@ __metadata:
     inherits: "npm:^2.0.1"
     safe-buffer: "npm:^5.1.2"
   checksum: 10c0/b7bd75077f419c8e013fc4d4dada48be71882e37d69a44af65a2f2804b91e253441eb43a0614423a1c91bb830b8140b0dc906bc797245e2e275759584f4efcc5
+  languageName: node
+  linkType: hard
+
+"md5@npm:2.3.0":
+  version: 2.3.0
+  resolution: "md5@npm:2.3.0"
+  dependencies:
+    charenc: "npm:0.0.2"
+    crypt: "npm:0.0.2"
+    is-buffer: "npm:~1.1.6"
+  checksum: 10c0/14a21d597d92e5b738255fbe7fe379905b8cb97e0a49d44a20b58526a646ec5518c337b817ce0094ca94d3e81a3313879c4c7b510d250c282d53afbbdede9110
   languageName: node
   linkType: hard
 
@@ -15829,6 +15939,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"resend@npm:^6.8.0":
+  version: 6.8.0
+  resolution: "resend@npm:6.8.0"
+  dependencies:
+    svix: "npm:1.84.1"
+  peerDependencies:
+    "@react-email/render": "*"
+  peerDependenciesMeta:
+    "@react-email/render":
+      optional: true
+  checksum: 10c0/97ea528c988a0f77b3672ea7c378213f18facb4dc3099472fced7c5d37dec99bdff36f1bd3b15e1953479d486e0fadf50ffdef20249109595d2cf0b94de13696
+  languageName: node
+  linkType: hard
+
 "resolve-cwd@npm:^3.0.0":
   version: 3.0.0
   resolution: "resolve-cwd@npm:3.0.0"
@@ -16106,6 +16230,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
+    "@redwoodjs/auth-dbauth-setup": "npm:8.9.0"
     "@redwoodjs/core": "npm:8.9.0"
     "@redwoodjs/project-config": "npm:8.9.0"
     framer-motion: "npm:^11.16.0"
@@ -16737,6 +16862,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"standardwebhooks@npm:1.0.0":
+  version: 1.0.0
+  resolution: "standardwebhooks@npm:1.0.0"
+  dependencies:
+    "@stablelib/base64": "npm:^1.0.0"
+    fast-sha256: "npm:^1.3.0"
+  checksum: 10c0/aee097d0f3c05172c19b80df1ed9596a2ce92f8956957650d0bbe47c2ca6d36515796b51d523333cb4a48c889b2ab130d789e7879e14975c4381bc7a61274327
+  languageName: node
+  linkType: hard
+
 "statuses@npm:2.0.1":
   version: 2.0.1
   resolution: "statuses@npm:2.0.1"
@@ -17092,6 +17227,16 @@ __metadata:
   version: 1.0.0
   resolution: "supports-preserve-symlinks-flag@npm:1.0.0"
   checksum: 10c0/6c4032340701a9950865f7ae8ef38578d8d7053f5e10518076e6554a9381fa91bd9c6850193695c141f32b21f979c985db07265a758867bac95de05f7d8aeb39
+  languageName: node
+  linkType: hard
+
+"svix@npm:1.84.1":
+  version: 1.84.1
+  resolution: "svix@npm:1.84.1"
+  dependencies:
+    standardwebhooks: "npm:1.0.0"
+    uuid: "npm:^10.0.0"
+  checksum: 10c0/59b06741d37d1de271fcc1fe7f16e4180bb295fd3e8990be330bb6c31988d4ba2ca82548060374dba3d9ceb776c49136f70a485dd856a3dfb9a76728c429874e
   languageName: node
   linkType: hard
 
@@ -17956,7 +18101,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:10.0.0":
+"uuid@npm:10.0.0, uuid@npm:^10.0.0":
   version: 10.0.0
   resolution: "uuid@npm:10.0.0"
   bin:
@@ -18165,6 +18310,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "web@workspace:web"
   dependencies:
+    "@redwoodjs/auth": "npm:8.9.0"
+    "@redwoodjs/auth-dbauth-web": "npm:^8.9.0"
     "@redwoodjs/forms": "npm:8.9.0"
     "@redwoodjs/router": "npm:8.9.0"
     "@redwoodjs/vite": "npm:8.9.0"
