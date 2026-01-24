@@ -57,6 +57,31 @@ export const handler = async (event, context) => {
       expires: 60 * 60 * 24 * 1000,
     }
 
+    const resetPasswordOptions = {
+      // handler() is called after dbAuth has validated the resetToken and new password.
+      // The user argument will be the user found with the matching resetToken.
+      // The hashedPassword and salt are already computed by dbAuth.
+      handler: async (user, hashedPassword, salt) => {
+        // Update the user's password and clear the reset token
+        const updatedUser = await db.user.update({
+          where: { id: user.id },
+          data: {
+            hashedPassword: hashedPassword,
+            salt: salt,
+            resetToken: null,
+            resetTokenExpiresAt: null,
+          },
+        })
+        return updatedUser
+      },
+      errors: {
+        resetTokenExpired: 'This password reset link has expired. Please request a new one.',
+        resetTokenInvalid: 'Invalid password reset link. Please request a new one.',
+        resetTokenRequired: 'Password reset token is required',
+        reusedPassword: 'You must choose a different password than your current one.',
+      },
+    }
+
   const loginOptions = {
     // handler() is called after finding the user that matches the
     // username/password provided at login, but before actually considering them
@@ -186,6 +211,7 @@ export const handler = async (event, context) => {
     },
 
     forgotPassword: forgotPasswordOptions,
+    resetPassword: resetPasswordOptions,
     login: loginOptions,
     signup: signupOptions,
   })
