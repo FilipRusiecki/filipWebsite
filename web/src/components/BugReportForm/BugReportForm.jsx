@@ -28,12 +28,15 @@ const BugReportForm = ({ onSuccess }) => {
   const [frequency, setFrequency] = useState('')
   const [severity, setSeverity] = useState('')
   const [message, setMessage] = useState(null)
+  const [createdTicketId, setCreatedTicketId] = useState(null)
 
   const [createTicket, { loading }] = useMutation(CREATE_TICKET, {
-    onCompleted: () => {
+    onCompleted: (data) => {
+      const ticketId = data.createTicket.id
+      setCreatedTicketId(ticketId)
       setMessage({
         type: 'success',
-        text: 'Bug report submitted successfully! Thank you for helping us improve the game.',
+        text: 'Bug report submitted successfully! Save your ticket link below to track your report status.',
       })
       // Reset form
       setTitle('')
@@ -46,7 +49,6 @@ const BugReportForm = ({ onSuccess }) => {
       setActualBehavior('')
       setFrequency('')
       setSeverity('')
-      setTimeout(() => setMessage(null), 5000)
       if (onSuccess) onSuccess()
     },
     onError: (error) => {
@@ -81,6 +83,59 @@ const BugReportForm = ({ onSuccess }) => {
         },
       },
     })
+  }
+
+  const getTicketUrl = () => {
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : ''
+    return `${baseUrl}/support?id=${createdTicketId}`
+  }
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(getTicketUrl())
+    setMessage({ type: 'success', text: 'Ticket link copied to clipboard!' })
+    setTimeout(() => setMessage({ type: 'success', text: 'Bug report submitted successfully! Save your ticket link below to track your report status.' }), 2000)
+  }
+
+  // Show success screen with ticket link
+  if (createdTicketId) {
+    return (
+      <div className="space-y-6">
+        <div className="p-6 rounded-lg border-2 bg-green-500/20 border-green-500/50 text-center">
+          <div className="text-green-400 text-xl font-bold mb-4">Bug Report Submitted Successfully!</div>
+          <p className="text-game-light mb-4">
+            Your ticket ID is <span className="text-game-accent font-mono font-bold">#{createdTicketId}</span>
+          </p>
+          <p className="text-game-light/80 mb-4 text-sm">
+            Save this link to check your bug report status and view responses:
+          </p>
+          <div className="bg-game-dark/50 p-3 rounded-lg mb-4 break-all">
+            <a 
+              href={getTicketUrl()} 
+              className="text-game-accent hover:underline font-mono text-sm"
+            >
+              {getTicketUrl()}
+            </a>
+          </div>
+          <div className="flex gap-3 justify-center flex-wrap">
+            <button
+              onClick={copyToClipboard}
+              className="bg-game-accent text-game-dark px-4 py-2 rounded-lg font-semibold hover:bg-game-accent/90 transition-colors"
+            >
+              Copy Link
+            </button>
+            <button
+              onClick={() => setCreatedTicketId(null)}
+              className="bg-game-primary text-game-light px-4 py-2 rounded-lg font-semibold hover:bg-game-primary/80 transition-colors border border-game-accent/30"
+            >
+              Submit Another Bug Report
+            </button>
+          </div>
+          <p className="text-game-light/60 text-sm mt-4">
+            Thank you for helping us improve the game!
+          </p>
+        </div>
+      </div>
+    )
   }
 
   return (

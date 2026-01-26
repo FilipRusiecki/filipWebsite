@@ -1,6 +1,6 @@
 import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
-import { ForbiddenError } from '@redwoodjs/graphql-server'
+import { context, ForbiddenError } from '@redwoodjs/graphql-server'
 
 /**
  * Get all tickets - ADMIN ONLY
@@ -53,7 +53,7 @@ export const ticket = ({ id }) => {
  * - Can be created anonymously (email only)
  * - If user is logged in, associate with user account
  */
-export const createTicket = ({ input }, { context }) => {
+export const createTicket = ({ input }) => {
   const currentUser = context?.currentUser
 
   return db.ticket.create({
