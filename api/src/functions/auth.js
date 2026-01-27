@@ -182,6 +182,28 @@ export const handler = async (event, context) => {
 
   // DbAuthHandler should now be available from @redwoodjs/auth-dbauth-api
 
+  // Debug: on login attempts, verify DB is reachable (helps diagnose 400 on Vercel)
+  const isLogin = event.httpMethod === 'POST' && event.body && typeof event.body === 'string' && (() => {
+    try {
+      const b = JSON.parse(event.body)
+      return b && (b.username !== undefined || b.password !== undefined)
+    } catch { return false }
+  })()
+  if (isLogin) {
+    console.log('Login attempt – DATABASE_URL set:', !!process.env.DATABASE_URL)
+    try {
+      await db.$queryRaw`SELECT 1`
+      console.log('Login attempt – DB connection OK')
+    } catch (dbErr) {
+      console.error('Login attempt – DB connection FAILED:', dbErr?.message || dbErr)
+      return {
+        statusCode: 503,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: 'Database unreachable', message: dbErr?.message || 'Connection failed' }),
+      }
+    }
+  }
+
   const authHandler = new DbAuthHandler(event, context, {
     // Provide prisma db client
     db: db,
