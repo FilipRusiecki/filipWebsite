@@ -32,7 +32,11 @@ const BugReportForm = ({ onSuccess }) => {
 
   const [createTicket, { loading }] = useMutation(CREATE_TICKET, {
     onCompleted: (data) => {
-      const ticketId = data.createTicket.id
+      const ticketId = data?.createTicket?.id
+      if (!ticketId) {
+        setMessage({ type: 'error', text: 'Bug report was created but we could not load the link. Please try again or contact support.' })
+        return
+      }
       setCreatedTicketId(ticketId)
       setMessage({
         type: 'success',
@@ -49,7 +53,7 @@ const BugReportForm = ({ onSuccess }) => {
       setActualBehavior('')
       setFrequency('')
       setSeverity('')
-      if (onSuccess) onSuccess()
+      if (onSuccess) onSuccess(ticketId)
     },
     onError: (error) => {
       setMessage({ type: 'error', text: 'Failed to submit bug report. Please try again.' })
@@ -87,7 +91,7 @@ const BugReportForm = ({ onSuccess }) => {
 
   const getTicketUrl = () => {
     const baseUrl = typeof window !== 'undefined' ? window.location.origin : ''
-    return `${baseUrl}/support?id=${createdTicketId}`
+    return `${baseUrl}/support/${createdTicketId}`
   }
 
   const copyToClipboard = () => {

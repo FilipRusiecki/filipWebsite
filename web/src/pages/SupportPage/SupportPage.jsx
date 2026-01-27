@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useQuery } from '@redwoodjs/web'
 import { gql } from '@redwoodjs/web'
 import { Metadata } from '@redwoodjs/web'
-import { useParams, navigate, routes } from '@redwoodjs/router'
+import { useParams, useLocation, navigate, routes } from '@redwoodjs/router'
 
 import Navigation from 'src/components/Navigation/Navigation'
 import Footer from 'src/components/Footer/Footer'
@@ -60,8 +60,20 @@ const TICKET_QUERY = gql`
   }
 `
 
+// Parse ticket id from path (/support/123) or query (?id=123)
+const useTicketId = () => {
+  const { id: pathId } = useParams()
+  const { search } = useLocation()
+  const queryId = typeof window !== 'undefined' && search
+    ? new URLSearchParams(search).get('id')
+    : null
+  const raw = pathId || queryId
+  const parsed = raw ? parseInt(raw, 10) : null
+  return parsed != null && !isNaN(parsed) ? parsed : null
+}
+
 const SupportPage = () => {
-  const { id } = useParams()
+  const id = useTicketId()
   const [showNewTicket, setShowNewTicket] = useState(!id)
   const [ticketType, setTicketType] = useState('support') // 'support' or 'bug_report'
 
@@ -78,17 +90,21 @@ const SupportPage = () => {
       const { data: ticketData, loading: ticketLoading, refetch: refetchTicket } = useQuery(
         TICKET_QUERY,
         {
-          variables: { id: id ? parseInt(id, 10) : null },
-          skip: !id || isNaN(parseInt(id, 10)),
+          variables: { id },
+          skip: !id || isNaN(id),
           errorPolicy: 'all', // Don't throw on error
           fetchPolicy: 'cache-and-network', // Try cache first
         }
       )
 
-  const handleTicketCreated = () => {
+  const handleTicketCreated = (ticketId) => {
     setShowNewTicket(false)
     refetchTickets()
-    navigate(routes.support())
+    if (ticketId) {
+      navigate(routes.supportTicket({ id: ticketId }))
+    } else {
+      navigate(routes.support())
+    }
   }
 
   const handleTicketUpdate = (updatedTicket) => {

@@ -24,7 +24,11 @@ const TicketForm = ({ onSuccess }) => {
 
   const [createTicket, { loading }] = useMutation(CREATE_TICKET, {
     onCompleted: (data) => {
-      const ticketId = data.createTicket.id
+      const ticketId = data?.createTicket?.id
+      if (!ticketId) {
+        setMessage({ type: 'error', text: 'Ticket was created but we could not load the link. Please try again or contact support.' })
+        return
+      }
       setCreatedTicketId(ticketId)
       setMessage({ 
         type: 'success', 
@@ -33,7 +37,7 @@ const TicketForm = ({ onSuccess }) => {
       setTitle('')
       setDescription('')
       setEmail('')
-      if (onSuccess) onSuccess()
+      if (onSuccess) onSuccess(ticketId)
     },
     onError: (error) => {
       setMessage({ type: 'error', text: 'Failed to submit ticket. Please try again.' })
@@ -64,7 +68,7 @@ const TicketForm = ({ onSuccess }) => {
 
   const getTicketUrl = () => {
     const baseUrl = typeof window !== 'undefined' ? window.location.origin : ''
-    return `${baseUrl}/support?id=${createdTicketId}`
+    return `${baseUrl}/support/${createdTicketId}`
   }
 
   const copyToClipboard = () => {
