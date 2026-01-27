@@ -9,13 +9,9 @@
  */
 
 import { db } from '../api/src/lib/db'
-import crypto from 'crypto'
+import { hashPassword } from '@redwoodjs/auth-dbauth-api'
 
-function hashPassword(password) {
-  const salt = crypto.randomBytes(16).toString('hex')
-  const hash = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex')
-  return { hashedPassword: hash, salt }
-}
+// Uses dbAuth's scrypt-based hashPassword so login works in production
 
 export default async () => {
   const argv = process.argv.slice(2)
@@ -83,7 +79,7 @@ export default async () => {
       console.log(`   Email Verified: ${updatedUser.emailVerified ? 'Yes' : 'No'}`)
       console.log(`\n💡 User can now log in!`)
     } else if (action === 'setpassword') {
-      const { hashedPassword, salt } = hashPassword(password)
+      const [hashedPassword, salt] = hashPassword(password)
       await db.user.update({
         where: { id: user.id },
         data: { hashedPassword, salt },

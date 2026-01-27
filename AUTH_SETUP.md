@@ -55,6 +55,45 @@ The application uses **dbAuth** (RedwoodJS's built-in database-backed authentica
 yarn rw exec createAdmin --email admin@example.com --password YourSecurePassword
 ```
 
+## Viewing users and the database
+
+There is no in-app "user list" or database UI. Use one of these:
+
+### 1. List users in the terminal
+
+Uses the database from your `.env` (`DATABASE_URL`). To see **production** users, point `.env` at your production DB (or run with `DATABASE_URL=... yarn rw exec listUsers`).
+
+```bash
+yarn rw exec listUsers
+```
+
+Shows all users with email, role, and email-verified status.
+
+### 2. Prisma Studio (browse all tables)
+
+Opens a local UI to browse and edit data. It uses `DATABASE_URL` from `.env`, so use your **production** URL in `.env` if you want to see production data.
+
+```bash
+yarn rw prisma studio
+```
+
+Opens in the browser (default http://localhost:5555). Open the **User** table to see users; use **Ticket**, **Reply**, etc. for other data.
+
+### 3. Prisma Data Platform / Prisma Cloud
+
+If your project uses [Prisma Data Platform](https://prisma.io/data-platform) or Prisma Cloud, the project dashboard has **Studio** in the sidebar. Use it to open your database and the **User** table.
+
+### 4. Resetting an admin password (for production login)
+
+Passwords are hashed with dbAuth’s scrypt. To fix a 400 on production login, set the password **against the production DB**:
+
+1. In `.env`, set `DATABASE_URL` to your **production** Postgres URL (or run the command with that URL in the environment).
+2. Run:
+   ```bash
+   yarn rw exec manageUser --set-password your-admin@email.com YourNewPassword
+   ```
+3. Log in on the live site with that **exact** password.
+
 ## Environment Variables
 
 ### Required Variables
