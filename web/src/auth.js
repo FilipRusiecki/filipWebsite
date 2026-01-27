@@ -118,18 +118,22 @@ export const AuthProvider = ({ children }) => {
       let userMetadata = null
       try {
         // Add a small delay to ensure cookie is set
-        await new Promise(resolve => setTimeout(resolve, 100))
+        await new Promise(resolve => setTimeout(resolve, 300))
         userMetadata = await dbAuthClient.getUserMetadata()
       } catch (err) {
         console.error('getUserMetadata failed after login:', err)
-        // If we can't get user metadata, the login might not have worked properly
-        throw new Error('Failed to verify login. Please try again.')
+        // Login might have returned 400 but client didn't throw - surface likely causes
+        const msg = err?.message || ''
+        if (msg.includes('401') || msg.includes('403') || msg.includes('400')) {
+          throw new Error('Invalid email or password. If you just signed up, verify your email first.')
+        }
+        throw new Error('Failed to verify login. Please check your email and password and try again.')
       }
 
-      // Validate that we have required user data
+      // Validate that we have required user data (null often means login actually failed with 400)
       if (!userMetadata || !userMetadata.id || !userMetadata.email) {
         console.error('Invalid user data received:', userMetadata)
-        throw new Error('Invalid user data received. Please try again.')
+        throw new Error('Invalid email or password. If this is an admin account, ensure the production database has your user and DATABASE_URL is set correctly on the server.')
       }
 
       // CRITICAL: Never default to admin role - only use the role from the database
@@ -152,8 +156,8 @@ export const AuthProvider = ({ children }) => {
       // Ensure we're not authenticated on error
       setIsAuthenticated(false)
       setCurrentUser(null)
-      // Extract error message from response if available
-      const errorMessage = error.message || error.error || 'Invalid email or password'
+      // Pass through API error messages (e.g. "Please verify your email", "Invalid email or password")
+      const errorMessage = error.message || (typeof error.error === 'string' ? error.error : null) || 'Invalid email or password'
       throw new Error(errorMessage)
     }
   }
