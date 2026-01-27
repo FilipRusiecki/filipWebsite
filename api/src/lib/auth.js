@@ -17,8 +17,11 @@ import { AuthenticationError, ForbiddenError } from '@redwoodjs/graphql-server'
  * the same instance of Prisma Client that Redwood uses internally.
  */
 export const getCurrentUser = async (session) => {
+  // No session = not logged in. Return null so unauthenticated GraphQL requests
+  // (home page, public queries, currentUser from auth) don't crash with 500.
+  // Resolvers that need auth use @requireAuth and will throw when currentUser is null.
   if (!session || !session.id) {
-    throw new AuthenticationError("You don't have permission to do that.")
+    return null
   }
 
   return await db.user.findUnique({
