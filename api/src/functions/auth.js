@@ -210,6 +210,8 @@ export const handler = async (event, context) => {
     // The name of the property you'd call on `db` to access your user table.
     // i.e. if your Prisma model is named `User` this value would be `user`, as in `db.user`
     authModelAccessor: 'user',
+    // Fields allowed in login/getToken responses (role needed for admin checks)
+    allowedUserFields: ['id', 'email', 'role'],
     // A list of fields on your user model that are used as credentials
     // to login. These fields will be checked when logging in.
     // i.e. `['email', 'username']` would allow logging in with either email or username.

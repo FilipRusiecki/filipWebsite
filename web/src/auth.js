@@ -8,6 +8,26 @@ const dbAuthClient = createDbAuthClient({
   },
 })
 
+// Fetch full current user (id, email, role) from GraphQL when we only have a session id.
+// dbAuth's getUserMetadata() returns just the id; this fills in the rest.
+const fetchCurrentUserFromApi = async () => {
+  try {
+    const res = await fetch('/api/graphql', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        query: 'query { currentUser { id email role } }',
+      }),
+    })
+    const json = await res.json()
+    const user = json?.data?.currentUser
+    return user && typeof user === 'object' && user.id != null && user.email != null ? user : null
+  } catch {
+    return null
+  }
+}
+
 // Create Auth Context
 const AuthContext = createContext({
   isAuthenticated: false,
@@ -62,8 +82,21 @@ export const AuthProvider = ({ children }) => {
         if (!isMounted) return
 
         if (userMetadata) {
-          setIsAuthenticated(true)
-          setCurrentUser(userMetadata)
+          const hasFullUser = typeof userMetadata === 'object' && userMetadata?.id != null && userMetadata?.email != null
+          if (hasFullUser) {
+            setIsAuthenticated(true)
+            setCurrentUser(userMetadata)
+          } else {
+            // dbAuth getUserMetadata returns only the user id; fetch full user (id, email, role)
+            const fullUser = await fetchCurrentUserFromApi()
+            if (fullUser) {
+              setIsAuthenticated(true)
+              setCurrentUser(fullUser)
+            } else {
+              setIsAuthenticated(false)
+              setCurrentUser(null)
+            }
+          }
         } else {
           setIsAuthenticated(false)
           setCurrentUser(null)
@@ -111,46 +144,28 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await dbAuthClient.login(credentials)
 
-      // If login fails, dbAuth will throw an error, so if we get here, login succeeded
-      // But we need to verify we got valid user data before marking as authenticated
+      // dbAuth web client does NOT throw on 400; getUserMetadata() returns only the user id.
+      // On success the login API returns the sanitized user body (id, email, role when allowedUserFields includes them).
+      const looksLikeUser = response && typeof response === 'object' && response.id != null && response.email != null
 
-      // After login, get user metadata to ensure we have the full user object
-      let userMetadata = null
-      try {
-        // Add a small delay to ensure cookie is set
-        await new Promise(resolve => setTimeout(resolve, 300))
-        userMetadata = await dbAuthClient.getUserMetadata()
-      } catch (err) {
-        console.error('getUserMetadata failed after login:', err)
-        // Login might have returned 400 but client didn't throw - surface likely causes
-        const msg = err?.message || ''
-        if (msg.includes('401') || msg.includes('403') || msg.includes('400')) {
-          throw new Error('Invalid email or password. If you just signed up, verify your email first.')
+      if (looksLikeUser) {
+        const userMetadata = {
+          id: response.id,
+          email: response.email,
+          role: response.role,
         }
-        throw new Error('Failed to verify login. Please check your email and password and try again.')
+        if (!userMetadata.role) {
+          console.error('User data missing role:', userMetadata)
+          throw new Error('User account is missing role information. Please contact support.')
+        }
+        setCurrentUser(userMetadata)
+        setIsAuthenticated(true)
+        return response
       }
 
-      // Validate that we have required user data (null often means login actually failed with 400)
-      if (!userMetadata || !userMetadata.id || !userMetadata.email) {
-        console.error('Invalid user data received:', userMetadata)
-        throw new Error('Invalid email or password. If this is an admin account, ensure the production database has your user and DATABASE_URL is set correctly on the server.')
-      }
-
-      // CRITICAL: Never default to admin role - only use the role from the database
-      if (!userMetadata.role) {
-        console.error('User data missing role:', userMetadata)
-        throw new Error('User account is missing role information. Please contact support.')
-      }
-
-      // Update state only with validated user data
-      setCurrentUser({
-        id: userMetadata.id,
-        email: userMetadata.email,
-        role: userMetadata.role, // Use actual role from database, no fallback
-      })
-      setIsAuthenticated(true)
-
-      return response
+      // Login failed (400 with { error: "..." }) or body was not a user object
+      const errorMessage = (response && typeof response === 'object' && response.error) || 'Invalid email or password. If this is an admin account, ensure the production database has your user and DATABASE_URL is set correctly on the server.'
+      throw new Error(typeof errorMessage === 'string' ? errorMessage : 'Invalid email or password.')
     } catch (error) {
       console.error('Login error:', error)
       // Ensure we're not authenticated on error
