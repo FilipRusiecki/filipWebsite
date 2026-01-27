@@ -100,7 +100,9 @@ const AdminDashboardPage = () => {
     return null
   }
 
-  const { data, loading, refetch } = useQuery(TICKETS_QUERY)
+  const { data, loading, refetch } = useQuery(TICKETS_QUERY, {
+    fetchPolicy: 'network-only', // Always fetch fresh list when viewing dashboard
+  })
   const [updateStatus] = useMutation(UPDATE_TICKET_STATUS, {
     onCompleted: () => {
       refetch()

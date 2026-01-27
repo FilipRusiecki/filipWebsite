@@ -6,6 +6,7 @@ const CREATE_TICKET = gql`
   mutation CreateBugReportMutation($input: CreateTicketInput!) {
     createTicket(input: $input) {
       id
+      viewToken
       title
       description
       email
@@ -29,15 +30,19 @@ const BugReportForm = ({ onSuccess }) => {
   const [severity, setSeverity] = useState('')
   const [message, setMessage] = useState(null)
   const [createdTicketId, setCreatedTicketId] = useState(null)
+  const [viewToken, setViewToken] = useState(null)
 
   const [createTicket, { loading }] = useMutation(CREATE_TICKET, {
     onCompleted: (data) => {
-      const ticketId = data?.createTicket?.id
+      const ticket = data?.createTicket
+      const ticketId = ticket?.id
+      const viewTok = ticket?.viewToken
       if (!ticketId) {
         setMessage({ type: 'error', text: 'Bug report was created but we could not load the link. Please try again or contact support.' })
         return
       }
       setCreatedTicketId(ticketId)
+      setViewToken(viewTok || null)
       setMessage({
         type: 'success',
         text: 'Bug report submitted successfully! Save your ticket link below to track your report status.',
@@ -53,7 +58,7 @@ const BugReportForm = ({ onSuccess }) => {
       setActualBehavior('')
       setFrequency('')
       setSeverity('')
-      if (onSuccess) onSuccess(ticketId)
+      if (onSuccess) onSuccess(ticketId, viewTok)
     },
     onError: (error) => {
       setMessage({ type: 'error', text: 'Failed to submit bug report. Please try again.' })
@@ -91,7 +96,8 @@ const BugReportForm = ({ onSuccess }) => {
 
   const getTicketUrl = () => {
     const baseUrl = typeof window !== 'undefined' ? window.location.origin : ''
-    return `${baseUrl}/support/${createdTicketId}`
+    const path = `${baseUrl}/support/${createdTicketId}`
+    return viewToken ? `${path}?token=${encodeURIComponent(viewToken)}` : path
   }
 
   const copyToClipboard = () => {

@@ -8,6 +8,7 @@ export const schema = gql`
     email: String
     userId: Int
     user: User
+    viewToken: String
     ticketType: String!
     status: String!
     gameVersion: String
@@ -39,9 +40,8 @@ export const schema = gql`
 
   type Query {
     tickets: [Ticket!]! @requireAuth(roles: ["admin"])
-    # Individual ticket viewing is public (users can view their own ticket by ID)
-    # But we'll add email verification in the service layer
-    ticket(id: Int!): Ticket @skipAuth
+    # Single ticket: allowed only for admin, owner, or when token matches (link-based access)
+    ticket(id: Int!, token: String): Ticket @skipAuth
   }
 
   input CreateTicketInput {

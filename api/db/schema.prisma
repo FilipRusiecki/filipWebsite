@@ -39,6 +39,7 @@ model Ticket {
   email             String?   // Email for anonymous tickets
   userId            Int?      // User ID if ticket was created by logged-in user
   user              User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  viewToken         String?   // Secret token for link-based access; only holders of the link can view
   ticketType        String    @default("support") // support, bug_report
   status            String    @default("open") // open, in_progress, resolved, closed
   // Bug Report Specific Fields

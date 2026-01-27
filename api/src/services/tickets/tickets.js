@@ -1,6 +1,7 @@
 import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
-import { context, ForbiddenError } from '@redwoodjs/graphql-server'
+import { context } from '@redwoodjs/graphql-server'
+import crypto from 'crypto'
 
 /**
  * Get all tickets - ADMIN ONLY
@@ -26,17 +27,18 @@ export const tickets = () => {
 }
 
 /**
- * Get a single ticket by ID
- * - Public access for anonymous tickets (by email verification)
- * - Users can view their own tickets
- * - Admins can view any ticket
+ * Get a single ticket by ID.
+ * Allowed only if:
+ * - currentUser is admin, or
+ * - currentUser.id === ticket.userId (owner), or
+ * - token argument matches ticket.viewToken (link-based access).
+ * Returns ticket without viewToken for privacy.
  */
-export const ticket = ({ id }) => {
-  // Public endpoint - but we'll add authorization checks in service layer
-  // For now, allow public access (can be restricted later with email verification)
-  return db.ticket.findUnique({
+export const ticket = async ({ id, token }) => {
+  const currentUser = context?.currentUser
+  const row = await db.ticket.findUnique({
     where: { id },
-    include: { 
+    include: {
       replies: { orderBy: { createdAt: 'asc' } },
       user: {
         select: {
@@ -46,22 +48,35 @@ export const ticket = ({ id }) => {
       },
     },
   })
+  if (!row) return null
+
+  const isAdmin = currentUser?.role === 'admin'
+  const isOwner = currentUser?.id != null && row.userId === currentUser.id
+  const hasValidToken = token && row.viewToken && token === row.viewToken
+
+  if (!isAdmin && !isOwner && !hasValidToken) return null
+
+  const { viewToken: _, ...ticket } = row
+  return ticket
 }
 
 /**
  * Create a new ticket
  * - Can be created anonymously (email only)
  * - If user is logged in, associate with user account
+ * - Sets viewToken so the creator can share a link; only that link grants access
  */
 export const createTicket = ({ input }) => {
   const currentUser = context?.currentUser
+  const viewToken = crypto.randomBytes(24).toString('hex')
 
   return db.ticket.create({
     data: {
       title: input.title,
       description: input.description,
       email: input.email,
-      userId: currentUser?.id || null, // Associate with user if logged in
+      userId: currentUser?.id || null,
+      viewToken,
       ticketType: input.ticketType || 'support',
       status: 'open',
       gameVersion: input.gameVersion,
@@ -72,7 +87,7 @@ export const createTicket = ({ input }) => {
       frequency: input.frequency,
       severity: input.severity,
     },
-    include: { 
+    include: {
       replies: true,
       user: {
         select: {

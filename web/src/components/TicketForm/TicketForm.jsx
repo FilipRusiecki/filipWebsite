@@ -6,6 +6,7 @@ const CREATE_TICKET = gql`
   mutation CreateSupportTicketMutation($input: CreateTicketInput!) {
     createTicket(input: $input) {
       id
+      viewToken
       title
       description
       email
@@ -21,15 +22,19 @@ const TicketForm = ({ onSuccess }) => {
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState(null)
   const [createdTicketId, setCreatedTicketId] = useState(null)
+  const [viewToken, setViewToken] = useState(null)
 
   const [createTicket, { loading }] = useMutation(CREATE_TICKET, {
     onCompleted: (data) => {
-      const ticketId = data?.createTicket?.id
+      const ticket = data?.createTicket
+      const ticketId = ticket?.id
+      const viewToken = ticket?.viewToken
       if (!ticketId) {
         setMessage({ type: 'error', text: 'Ticket was created but we could not load the link. Please try again or contact support.' })
         return
       }
       setCreatedTicketId(ticketId)
+      setViewToken(viewToken || null)
       setMessage({ 
         type: 'success', 
         text: 'Ticket submitted successfully! Save your ticket link below to track your ticket status.' 
@@ -37,7 +42,7 @@ const TicketForm = ({ onSuccess }) => {
       setTitle('')
       setDescription('')
       setEmail('')
-      if (onSuccess) onSuccess(ticketId)
+      if (onSuccess) onSuccess(ticketId, viewToken)
     },
     onError: (error) => {
       setMessage({ type: 'error', text: 'Failed to submit ticket. Please try again.' })
@@ -68,7 +73,8 @@ const TicketForm = ({ onSuccess }) => {
 
   const getTicketUrl = () => {
     const baseUrl = typeof window !== 'undefined' ? window.location.origin : ''
-    return `${baseUrl}/support/${createdTicketId}`
+    const path = `${baseUrl}/support/${createdTicketId}`
+    return viewToken ? `${path}?token=${encodeURIComponent(viewToken)}` : path
   }
 
   const copyToClipboard = () => {

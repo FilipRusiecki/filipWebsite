@@ -33,8 +33,8 @@ const TICKETS_QUERY = gql`
 `
 
 const TICKET_QUERY = gql`
-  query TicketQuery($id: Int!) {
-    ticket(id: $id) {
+  query TicketQuery($id: Int!, $token: String) {
+    ticket(id: $id, token: $token) {
       id
       title
       description
@@ -72,8 +72,16 @@ const useTicketId = () => {
   return parsed != null && !isNaN(parsed) ? parsed : null
 }
 
+// Parse view token from query (?token=...). Required for anonymous tickets.
+const useViewToken = () => {
+  const { search } = useLocation()
+  if (typeof window === 'undefined' || !search) return null
+  return new URLSearchParams(search).get('token')
+}
+
 const SupportPage = () => {
   const id = useTicketId()
+  const token = useViewToken()
   const [showNewTicket, setShowNewTicket] = useState(!id)
   const [ticketType, setTicketType] = useState('support') // 'support' or 'bug_report'
 
@@ -90,18 +98,23 @@ const SupportPage = () => {
       const { data: ticketData, loading: ticketLoading, refetch: refetchTicket } = useQuery(
         TICKET_QUERY,
         {
-          variables: { id },
+          variables: { id, token: token || null },
           skip: !id || isNaN(id),
-          errorPolicy: 'all', // Don't throw on error
-          fetchPolicy: 'cache-and-network', // Try cache first
+          errorPolicy: 'all',
+          fetchPolicy: 'cache-and-network',
         }
       )
 
-  const handleTicketCreated = (ticketId) => {
+  const handleTicketCreated = (ticketId, viewToken) => {
     setShowNewTicket(false)
     refetchTickets()
     if (ticketId) {
-      navigate(routes.supportTicket({ id: ticketId }))
+      const path = routes.supportTicket({ id: ticketId })
+      if (viewToken) {
+        navigate(`${path}?token=${encodeURIComponent(viewToken)}`)
+      } else {
+        navigate(path)
+      }
     } else {
       navigate(routes.support())
     }
@@ -156,7 +169,7 @@ const SupportPage = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-8">
-            {/* Main Content Area - Public users can only create tickets or view their own ticket by ID */}
+            {/* Main Content Area - Only admins, owners, or link-with-token can view a ticket */}
             <div>
               {id && ticketData?.ticket ? (
                 <div>
@@ -168,6 +181,20 @@ const SupportPage = () => {
                       onUpdate={handleTicketUpdate}
                     />
                   )}
+                </div>
+              ) : id && !ticketLoading && ticketData?.ticket == null ? (
+                <div className="bg-game-dark border-2 border-red-500/30 rounded-lg p-8 text-center">
+                  <p className="text-red-400 font-semibold mb-2">You don't have access to this ticket.</p>
+                  <p className="text-game-light/80 text-sm mb-4">
+                    Use the exact link you received when you created the ticket (it includes a secret token). 
+                    If you're the ticket owner, make sure you're using that link or are logged in.
+                  </p>
+                  <button
+                    onClick={() => { setShowNewTicket(true); navigate(routes.support()) }}
+                    className="bg-game-accent text-game-dark px-4 py-2 rounded-lg font-semibold hover:bg-game-accent/90"
+                  >
+                    Back to Support
+                  </button>
                 </div>
               ) : showNewTicket ? (
                 <div className="bg-game-dark border-2 border-game-accent/30 rounded-lg p-6">
