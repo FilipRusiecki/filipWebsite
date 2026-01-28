@@ -128,7 +128,7 @@ const SupportPage = () => {
   return (
     <>
       <Metadata
-        title="Support - FRVideoGames"
+        title="Support - Filip Rusiecki Video Games"
         description="Submit bug reports, ask questions, or get help with Play With Friends"
       />
       <div className="dark bg-game-dark min-h-screen">

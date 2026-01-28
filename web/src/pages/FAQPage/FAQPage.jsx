@@ -65,7 +65,7 @@ const FAQPage = () => {
   return (
     <>
       <Metadata
-        title="Frequently Asked Questions - FRVideoGames"
+        title="Frequently Asked Questions - Filip Rusiecki Video Games"
         description="Find answers to common questions about Play With Friends, release dates, gameplay, and more"
       />
       <div className="dark bg-game-dark min-h-screen">

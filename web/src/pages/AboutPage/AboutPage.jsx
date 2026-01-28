@@ -38,8 +38,8 @@ const AboutPage = () => {
   return (
     <>
       <Metadata
-        title="About the Team - FRVideoGames"
-        description="Meet the team behind Play With Friends and FRVideoGames"
+        title="About the Team - Filip Rusiecki Video Games"
+        description="Meet the team behind Play With Friends and Filip Rusiecki Video Games"
       />
       <div className="dark bg-game-dark min-h-screen">
         <Navigation />

@@ -90,7 +90,7 @@ const AdminLoginPage = () => {
 
   return (
     <>
-      <Metadata title="Admin Login - FRVideoGames" />
+      <Metadata title="Admin Login - Filip Rusiecki Video Games" />
       <div className="dark bg-game-dark min-h-screen">
         <Navigation />
         <div className="py-12">

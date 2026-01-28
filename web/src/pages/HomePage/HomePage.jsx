@@ -15,7 +15,7 @@ const HomePage = () => {
   return (
     <>
       <Metadata
-        title="FRVideoGames - Play With Friends"
+        title="Filip Rusiecki Video Games - Play With Friends"
         description="A retro-style, co-op rogue-like where death matters. Play with up to 5 players, laugh through disasters, and survive the apocalypse together."
         ogUrl="https://store.steampowered.com/app/4152100/Play_With_Friends/"
       />

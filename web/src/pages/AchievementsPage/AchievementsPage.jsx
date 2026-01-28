@@ -16,7 +16,7 @@ const AchievementsPage = () => {
   return (
     <>
       <Metadata
-        title="Achievements - FRVideoGames"
+        title="Achievements - Filip Rusiecki Video Games"
         description="View all achievements and unlockables in Play With Friends"
       />
       <div className="dark bg-game-dark min-h-screen">

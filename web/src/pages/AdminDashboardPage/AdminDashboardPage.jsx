@@ -168,7 +168,7 @@ const AdminDashboardPage = () => {
 
   return (
     <>
-      <Metadata title="Admin Dashboard - FRVideoGames" />
+      <Metadata title="Admin Dashboard - Filip Rusiecki Video Games" />
       <div className="dark bg-game-dark min-h-screen">
         <Navigation />
         <div className="py-12">

@@ -15,7 +15,7 @@ const App = ({ children }) => {
 
   return (
     <FatalErrorBoundary page={FatalErrorPage}>
-      <RedwoodProvider titleTemplate="FRVideoGames">
+      <RedwoodProvider titleTemplate="Filip Rusiecki Video Games">
         <AuthProvider>
           <RedwoodApolloProvider>{children}</RedwoodApolloProvider>
         </AuthProvider>

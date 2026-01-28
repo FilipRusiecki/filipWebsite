@@ -58,7 +58,7 @@ const CosmeticsPage = () => {
   return (
     <>
       <Metadata
-        title="Cosmetics - FRVideoGames"
+        title="Cosmetics - Filip Rusiecki Video Games"
         description="Browse all available cosmetics including colors, hats, back accessories, and auras for Play With Friends"
       />
       <div className="dark bg-game-dark min-h-screen">

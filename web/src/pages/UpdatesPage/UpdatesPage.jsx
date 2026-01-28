@@ -26,7 +26,7 @@ const UpdatesPage = () => {
   return (
     <>
       <Metadata
-        title="Updates & Patch Notes - FRVideoGames"
+        title="Updates & Patch Notes - Filip Rusiecki Video Games"
         description="Stay up to date with the latest updates, patches, and news for Play With Friends"
       />
       <div className="dark bg-game-dark min-h-screen">

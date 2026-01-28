@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-game-light/60 text-sm">
-            © {new Date().getFullYear()} FRVideoGames. All rights reserved.
+            © {new Date().getFullYear()} Filip Rusiecki Video Games. All rights reserved.
           </div>
           <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center">
             <a

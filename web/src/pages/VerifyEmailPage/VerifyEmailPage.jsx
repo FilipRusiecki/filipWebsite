@@ -51,7 +51,7 @@ const VerifyEmailPage = () => {
 
   return (
     <>
-      <Metadata title="Verify Email - FRVideoGames" />
+      <Metadata title="Verify Email - Filip Rusiecki Video Games" />
       <div className="dark bg-game-dark min-h-screen">
         <Navigation />
         <div className="container mx-auto px-4 py-20">
