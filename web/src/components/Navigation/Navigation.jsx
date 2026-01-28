@@ -10,13 +10,9 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           <Link
             to={routes.home()}
-            className="flex items-center gap-2 text-game-accent hover:opacity-90 transition-opacity"
+            className="text-xl md:text-2xl font-bold text-game-accent hover:text-game-accent/80 transition-colors"
           >
-            <img
-              src="/images/logos/FRVGLOGO.png"
-              alt="Filip Rusiecki Video Games"
-              className="h-10 md:h-12 w-auto object-contain"
-            />
+            Filip Rusiecki Video Games
           </Link>
 
           {/* Desktop Navigation */}

@@ -9,6 +9,11 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
+          <img
+            src="/images/logos/FRVGLOGOtransperant.png"
+            alt="Filip Rusiecki Video Games"
+            className="h-24 sm:h-28 md:h-32 lg:h-40 w-auto object-contain mx-auto mb-6 sm:mb-8"
+          />
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 text-game-light px-2">
             Play With Friends
           </h1>
