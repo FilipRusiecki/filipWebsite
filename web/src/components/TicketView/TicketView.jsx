@@ -107,6 +107,11 @@ const TicketView = ({ ticket, onUpdate }) => {
           )}
         </div>
 
+        <div className="bg-game-dark border border-game-accent/40 rounded-lg p-3 mb-4 text-sm text-game-light/80">
+          <span className="font-semibold text-game-accent">Reminder:</span>{' '}
+          Please save or bookmark this page's URL. You'll need this link to view your ticket and replies later.
+        </div>
+
         {/* Bug Report Specific Information */}
         {ticket.ticketType === 'bug_report' && (
           <div className="bg-game-dark border border-game-accent/20 rounded-lg p-4 mb-4 space-y-3">
