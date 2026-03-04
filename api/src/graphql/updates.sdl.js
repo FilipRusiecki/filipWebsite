@@ -7,6 +7,7 @@ export const schema = gql`
     version: String
     content: String!
     summary: String
+    image: String
     isPublished: Boolean!
     createdAt: DateTime!
     updatedAt: DateTime!
@@ -23,6 +24,7 @@ export const schema = gql`
     version: String
     content: String!
     summary: String
+    image: String
     isPublished: Boolean
   }
 
@@ -32,6 +34,7 @@ export const schema = gql`
     version: String
     content: String
     summary: String
+    image: String
     isPublished: Boolean
   }
 

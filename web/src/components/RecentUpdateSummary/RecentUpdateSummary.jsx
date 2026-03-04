@@ -3,6 +3,14 @@ import { gql } from '@redwoodjs/web'
 import { Link, routes } from '@redwoodjs/router'
 import { motion } from 'framer-motion'
 
+import valentinesCarousel from '../../assets/images/updates/valentinesCarousel.png'
+import updateCarousel1 from '../../assets/images/updates/UPDATECarusle1.png'
+
+const UPDATE_IMAGE_BUNDLED = {
+  'valentinesCarousel.png': valentinesCarousel,
+  'UPDATECarusle1.png': updateCarousel1,
+}
+
 const RECENT_UPDATES_QUERY = gql`
   query RecentUpdatesQuery($limit: Int) {
     recentUpdates(limit: $limit) {
@@ -10,6 +18,7 @@ const RECENT_UPDATES_QUERY = gql`
       title
       version
       summary
+      image
       createdAt
     }
   }
@@ -74,6 +83,27 @@ const RecentUpdateSummary = () => {
               </span>
             </div>
           )}
+          {(() => {
+            let imgSrc = null
+            if (latestUpdate.title?.includes('Valentine')) {
+              imgSrc = valentinesCarousel || '/images/updates/valentinesCarousel.png'
+            } else if (latestUpdate.title?.includes('Quests, Proximity Chat')) {
+              imgSrc = updateCarousel1 || '/images/updates/UPDATECarusle1.png'
+            } else if (latestUpdate.image?.trim()) {
+              const key = latestUpdate.image.trim()
+              imgSrc = UPDATE_IMAGE_BUNDLED[key] || `/images/updates/${key}`
+            }
+            if (!imgSrc) return null
+            return (
+              <div className="rounded-lg overflow-hidden border border-game-accent/20 mb-4">
+                <img
+                  src={imgSrc}
+                  alt={latestUpdate.title || 'Latest update'}
+                  className="w-full h-auto object-cover max-h-48"
+                />
+              </div>
+            )
+          })()}
           <h3 className="text-2xl md:text-3xl font-bold text-game-light mb-4">
             {latestUpdate.title}
           </h3>

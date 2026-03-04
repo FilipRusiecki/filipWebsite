@@ -6,6 +6,15 @@ import { motion } from 'framer-motion'
 import Navigation from 'src/components/Navigation/Navigation'
 import Footer from 'src/components/Footer/Footer'
 
+// Bundled so update images always load (same files also in public/images/updates/)
+import valentinesCarousel from '../../assets/images/updates/valentinesCarousel.png'
+import updateCarousel1 from '../../assets/images/updates/UPDATECarusle1.png'
+
+const UPDATE_IMAGE_BUNDLED = {
+  'valentinesCarousel.png': valentinesCarousel,
+  'UPDATECarusle1.png': updateCarousel1,
+}
+
 const UPDATES_QUERY = gql`
   query UpdatesQuery {
     updates {
@@ -14,6 +23,7 @@ const UPDATES_QUERY = gql`
       version
       content
       summary
+      image
       createdAt
       updatedAt
     }
@@ -52,65 +62,58 @@ const UpdatesPage = () => {
                 <p className="text-game-light/60 text-lg">Loading updates...</p>
               </div>
             ) : data?.updates && data.updates.length > 0 ? (
-              <div className="space-y-8">
-                {data.updates.map((update, index) => (
-                  <motion.article
-                    key={update.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="bg-game-dark border-2 border-game-accent/30 rounded-lg p-6 md:p-8 hover:border-game-accent transition-all duration-300"
-                  >
-                    <div className="flex items-start justify-between mb-4 flex-wrap gap-4">
-                      <div className="flex-1">
-                        {update.version && (
-                          <div className="mb-3">
-                            <span className="px-3 py-1 bg-game-accent/20 text-game-accent rounded-full text-sm font-semibold">
-                              {update.version}
-                            </span>
-                          </div>
-                        )}
-                        <h2 className="text-2xl md:text-3xl font-bold text-game-light mb-2">
+              <div className="space-y-12">
+                {data.updates.map((update, index) => {
+                  let imgSrc = null
+                  if (update.title?.includes('Valentine')) {
+                    imgSrc = valentinesCarousel || '/images/updates/valentinesCarousel.png'
+                  } else if (update.title?.includes('Quests, Proximity Chat')) {
+                    imgSrc = updateCarousel1 || '/images/updates/UPDATECarusle1.png'
+                  } else if (update.image?.trim()) {
+                    const key = update.image.trim()
+                    imgSrc = UPDATE_IMAGE_BUNDLED[key] || `/images/updates/${key}`
+                  }
+                  return (
+                    <motion.article
+                      key={update.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="overflow-hidden rounded-lg border border-white/15 bg-[#1b2838] shadow-lg"
+                    >
+                      {/* Steam-style: full-width hero image first */}
+                      {imgSrc && (
+                        <div className="w-full overflow-hidden border-b border-white/10">
+                          <img
+                            src={imgSrc}
+                            alt=""
+                            className="w-full object-cover object-center"
+                            style={{ maxHeight: '420px' }}
+                          />
+                        </div>
+                      )}
+                      <div className="px-6 py-6 md:px-8 md:py-8">
+                        {/* Title and date below image, like Steam news */}
+                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
                           {update.title}
                         </h2>
-                        <div className="text-sm text-game-light/60">
-                          <span>
-                            Published:{' '}
-                            {new Date(update.createdAt).toLocaleDateString('en-US', {
-                              year: 'numeric',
-                              month: 'long',
-                              day: 'numeric',
-                            })}
-                          </span>
-                          {update.updatedAt !== update.createdAt && (
-                            <>
-                              <span className="mx-2">•</span>
-                              <span>
-                                Updated:{' '}
-                                {new Date(update.updatedAt).toLocaleDateString('en-US', {
-                                  year: 'numeric',
-                                  month: 'long',
-                                  day: 'numeric',
-                                })}
-                              </span>
-                            </>
-                          )}
-                        </div>
+                        <p className="text-sm text-[#8f98a0] mb-6">
+                          {new Date(update.createdAt).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          })}
+                        </p>
+                        {/* Body content - Steam-style readable column */}
+                        <div
+                          className="text-[#c7d5e0] leading-relaxed space-y-4 [&_p]:mb-4 [&_p:last-child]:mb-0 [&_strong]:text-white"
+                          style={{ fontSize: '15px' }}
+                          dangerouslySetInnerHTML={{ __html: update.content }}
+                        />
                       </div>
-                    </div>
-                    {update.summary && (
-                      <p className="text-game-light/80 text-lg mb-4 leading-relaxed">
-                        {update.summary}
-                      </p>
-                    )}
-                    <div className="bg-game-dark border border-game-accent/20 rounded-lg p-4 mt-4">
-                      <div
-                        className="text-game-light whitespace-pre-wrap leading-relaxed prose prose-invert max-w-none"
-                        dangerouslySetInnerHTML={{ __html: update.content }}
-                      />
-                    </div>
-                  </motion.article>
-                ))}
+                    </motion.article>
+                  )
+                })}
               </div>
             ) : (
               <div className="text-center py-12">

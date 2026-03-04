@@ -40,6 +40,7 @@ export const createUpdate = ({ input }) => {
       version: input.version,
       content: input.content,
       summary: input.summary,
+      image: input.image,
       isPublished: input.isPublished ?? false,
     },
   })
@@ -53,6 +54,7 @@ export const updateUpdate = ({ input }) => {
       version: input.version,
       content: input.content,
       summary: input.summary,
+      image: input.image,
       isPublished: input.isPublished,
     },
   })

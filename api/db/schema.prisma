@@ -71,6 +71,7 @@ model Update {
   version     String?  // e.g., "1.0.0", "Early Access 0.5"
   content     String   // Full patch notes content (markdown or HTML)
   summary     String?  // Short summary for homepage preview
+  image       String?  // Optional carousel/header image filename (e.g. valentinesCarousel.png), served from /images/updates/
   isPublished Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
