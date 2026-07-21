@@ -33,6 +33,20 @@ const AboutPage = () => {
         'I love creating digitaly, both 2D and 3D. I literaly cannot stop thinking about games and cars, all i want is to play /create / own cool games and cars. I want to constantly keep learning to get better at what i do and hopefully it shows in my work. The only time you fail, is when you give up',
       flag: null,
     },
+    {
+      name: 'Kotrina',
+      alias: 'kotrina.art',
+      role: 'Digital Artist',
+      image: '/images/developers/Digital Artist/profile pic.png',
+      description:
+        'Kotrina is a digital artist contributing artwork to Play With Friends. Her creative work helps bring the game\'s world and characters to life. Replace this with her own bio when ready.',
+      flag: null,
+      credits: {
+        instagram: 'https://www.instagram.com/kotrina.art/',
+        tiktok: 'https://www.tiktok.com/@kotrina.art',
+        handle: '@kotrina.art',
+      },
+    },
   ]
 
   return (
@@ -86,6 +100,33 @@ const AboutPage = () => {
                       <p className="text-game-light/60 text-sm mb-1">({member.alias})</p>
                     )}
                     <p className="text-game-accent font-semibold">{member.role}</p>
+                    {member.credits && (
+                      <div className="mt-3 text-sm text-game-light/70">
+                        <p className="mb-1">Credit: {member.credits.handle}</p>
+                        <div className="flex items-center justify-center gap-3 flex-wrap">
+                          {member.credits.instagram && (
+                            <a
+                              href={member.credits.instagram}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-game-accent hover:text-game-accent/80 transition-colors"
+                            >
+                              Instagram
+                            </a>
+                          )}
+                          {member.credits.tiktok && (
+                            <a
+                              href={member.credits.tiktok}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-game-accent hover:text-game-accent/80 transition-colors"
+                            >
+                              TikTok
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>
                   <p className="text-game-light/80 leading-relaxed whitespace-pre-wrap">
                     {member.description}
@@ -103,9 +144,9 @@ const AboutPage = () => {
               <div className="bg-game-dark border-2 border-game-accent/30 rounded-lg p-8 max-w-3xl mx-auto">
                 <h2 className="text-3xl font-bold text-game-light mb-4">Our Story</h2>
                 <p className="text-game-light/80 leading-relaxed mb-4">
-                  Play With Friends is being developed by three passionate developers alongside
-                  contributors, while balancing full-time jobs. We're committed to creating a
-                  game that brings friends together for chaotic, fun adventures.
+                  Play With Friends is being developed by a passionate team of developers and
+                  artists, alongside contributors, while balancing full-time jobs. We're committed
+                  to creating a game that brings friends together for chaotic, fun adventures.
                 </p>
                 <p className="text-game-light/80 leading-relaxed">
                   Community feedback shapes our development, and we're transparent about our
