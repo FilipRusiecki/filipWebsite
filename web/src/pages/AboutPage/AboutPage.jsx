@@ -55,6 +55,10 @@ const AboutPage = () => {
       description:
         'MACRUA are a Carlow-based band redefining their sound through collaboration, storytelling, and genre fluidity. Originally founded in 2023 by Aaron Smith as a solo project, MACRUA has since evolved into a fully realised band co-led by Smith (vocals/guitar) and Elliott Cass (keys), alongside Lillymae O\'Brien, Marko Majerník, and Niamh O\'Loughlin.\n\nDrawing inspiration from artists such as Fleetwood Mac, The Cranberries, Toto, and Keane, MACRUA blend nostalgic textures with a contemporary edge. Their music is shaped by the contrast and chemistry between Smith\'s background in musical theatre and Cass\'s grounding in jazz, fusion, and funk—resulting in a dynamic, genre-blurring sound driven by strong narrative songwriting.\n\nFollowing the release of Smith\'s earlier EP Initiation, the project underwent a significant creative shift in late 2025, marking a move toward shared artistic direction. This transition has opened new musical possibilities, allowing the band to expand both sonically and conceptually beyond its original framework while maintaining the rocky fun that can be seen in this EP.\n\nKnown for their energetic and engaging live performances, MACRUA create an atmosphere that invites audiences to connect—whether through introspective storytelling or infectious, uplifting moments.\n\nThe band are currently developing and recording a new EP set for release in 2026, capturing this evolved sound and collaborative identity. With a clear artistic direction and a commitment to pushing their creative boundaries, MACRUA are emerging as an exciting new voice within the Irish music scene.',
       flag: null,
+      credits: {
+        linktree: 'https://linktr.ee/macrua_official',
+        handle: '@macrua_official',
+      },
     },
   ]
 
@@ -131,6 +135,16 @@ const AboutPage = () => {
                               className="text-game-accent hover:text-game-accent/80 transition-colors"
                             >
                               TikTok
+                            </a>
+                          )}
+                          {member.credits.linktree && (
+                            <a
+                              href={member.credits.linktree}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-game-accent hover:text-game-accent/80 transition-colors"
+                            >
+                              Linktree
                             </a>
                           )}
                         </div>
