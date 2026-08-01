@@ -1,4 +1,5 @@
 import { Metadata } from '@redwoodjs/web'
+import { Link, routes } from '@redwoodjs/router'
 import { motion } from 'framer-motion'
 
 import Navigation from 'src/components/Navigation/Navigation'
@@ -14,6 +15,7 @@ const AboutPage = () => {
       description:
         'Filip is the founder and lead developer behind the project. He has been passionate about video games since a young age and sees game development as a way to escape reality, immerse himself in creative worlds, and express himself. While he deeply enjoys making games, he also loves playing them, drawing inspiration from the experiences they create.',
       flag: null,
+      portfolio: true,
     },
     {
       name: 'Dawid',
@@ -113,6 +115,16 @@ const AboutPage = () => {
                       <p className="text-game-light/60 text-sm mb-1">({member.alias})</p>
                     )}
                     <p className="text-game-accent font-semibold">{member.role}</p>
+                    {member.portfolio && (
+                      <div className="mt-4">
+                        <Link
+                          to={routes.portfolio()}
+                          className="inline-block bg-game-accent text-game-dark px-4 py-2 rounded-lg font-bold text-sm hover:bg-game-accent/90 transition-colors"
+                        >
+                          View Portfolio
+                        </Link>
+                      </div>
+                    )}
                     {member.credits && (
                       <div className="mt-3 text-sm text-game-light/70">
                         <p className="mb-1">Credit: {member.credits.handle}</p>
