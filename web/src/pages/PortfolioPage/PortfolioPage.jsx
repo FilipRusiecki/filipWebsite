@@ -121,8 +121,8 @@ const categories = [
         id: 'zombie-shooter',
         title: 'Zombie Shooter',
         description:
-          'A C++ / SFML top-down zombie survival shooter with round-based waves, grid pathfinding AI, combat, pickups, menus, and character customization. Built with a structured OOP design covering player, zombies, bullets, collision, consumables, and UI screens.',
-        tags: ['C++', 'SFML', 'Game Dev', 'AI / Pathfinding', '2D'],
+          'A C++ / SFML top-down zombie survival shooter with round-based waves and grid pathfinding so zombies chase the player around the map. Also includes combat, pickups, menus, and character customization — built with a structured OOP design covering player, zombies, bullets, collision, consumables, and UI.',
+        tags: ['C++', 'SFML', 'Game Dev', 'Pathfinding', 'AI', '2D'],
         link: 'https://github.com/FilipRusiecki/ProjectsToShow/tree/main/Zombie%20Game',
         image: null,
       },
