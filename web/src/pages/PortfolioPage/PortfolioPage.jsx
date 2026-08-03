@@ -27,7 +27,7 @@ const categories = [
           'A C++ / SFML lab (AILab5) that visualizes a flow algorithm with a heat map and a path from point A to point B while avoiding obstacles. Demonstrates pathfinding and spatial cost visualization for game AI.',
         tags: ['C++', 'SFML', 'Game AI', 'Pathfinding', 'Heat Map'],
         link: 'https://github.com/FilipRusiecki/ProjectsToShow/tree/main/FlowAlgorithmWithHeatMap',
-        image: null,
+        image: '/images/portfolio/FlowAlgorithmWithHeatmap.png',
       },
       {
         id: 'fuzzy-logic',
@@ -45,6 +45,15 @@ const categories = [
           'A C++ / SFML lab demonstrating classic steering behaviours — Seek, Flee, Pursue, Wander, and Arrive (slow/fast) — each with a vision cone. Built as a Visual Studio project (AILab3) to explore foundational game AI movement systems.',
         tags: ['C++', 'SFML', 'Game AI', 'Steering Behaviours', '2D'],
         link: 'https://github.com/FilipRusiecki/ProjectsToShow/tree/main/SimpleAIBehaviours',
+        image: '/images/portfolio/SimpleAIBehaviours.png',
+      },
+      {
+        id: 'tank-game',
+        title: 'Tank Game',
+        description:
+          'A C++ / SFML tank combat game with player and AI-controlled tanks, projectile pooling, oriented bounding-box collision, YAML-driven level loading, HUD, and win/lose game states. Built as a Visual Studio SFML project with Thor and yaml-cpp.',
+        tags: ['C++', 'SFML', 'Game Dev', 'AI', 'Level Loading', '2D'],
+        link: 'https://github.com/FilipRusiecki/ProjectsToShow/tree/main/TankGame',
         image: null,
       },
     ],
@@ -61,7 +70,8 @@ const categories = [
           'A commercial Steam release by FRVG — a fast-paced top-down 2D endless survival shooter. Fight zombie waves, pick random weapons, level up for upgrades, unlock maps, and buy permanent buffs between runs. Built and shipped to learn the full Steam publishing pipeline (released Jun 14, 2025).',
         tags: ['Steam', 'Game Dev', 'Roguelike', 'Top-Down Shooter', 'Published'],
         link: 'https://store.steampowered.com/app/3775870/Cube_Slayer/',
-        image: null,
+        image: '/images/portfolio/CubeSlayer.png',
+        imageFit: 'contain',
       },
       {
         id: 'useful-zombie-flesh',
@@ -79,7 +89,7 @@ const categories = [
           'A Minecraft Forge mod that expands the game with new dimensions, mobs, food, armor, tools, weapons, bosses, and dungeons. Built and published as a beta on CurseForge — a content-focused modding project exploring custom world content and gameplay systems.',
         tags: ['Minecraft', 'Java', 'Forge', 'Modding', 'Game Content'],
         link: 'https://legacy.curseforge.com/minecraft/mc-mods/anywhereyougo',
-        image: null,
+        image: '/images/portfolio/AnyWhereYouGoMinecraftMod.png',
       },
       {
         id: 'ggj-team-cermit',
@@ -88,7 +98,7 @@ const categories = [
           'A Unity game jam project with Team Cermit (“C stands for Cracked”) — built under Global Game Jam time pressure with C#, custom shaders, and a full Unity project pipeline. A collaborative prototype focused on shipping a playable experience in a short jam window.',
         tags: ['Unity', 'C#', 'Game Jam', 'Shaders', 'Team Project'],
         link: 'https://github.com/FilipRusiecki/GGJ-Team-Cermit',
-        image: null,
+        image: '/images/portfolio/Kermit.png',
       },
       {
         id: 'cube-field',
@@ -106,15 +116,6 @@ const categories = [
           'An endless runner built in C++ with Visual Studio — jump and climb through a cube tower as the challenge keeps going. A focused gameplay prototype exploring continuous progression and timing-based movement.',
         tags: ['C++', 'Game Dev', 'Endless Runner', '2D'],
         link: 'https://github.com/FilipRusiecki/ProjectsToShow/tree/main/CubeTowerJUmp',
-        image: null,
-      },
-      {
-        id: 'tank-game',
-        title: 'Tank Game',
-        description:
-          'A C++ / SFML tank combat game with player and AI-controlled tanks, projectile pooling, oriented bounding-box collision, YAML-driven level loading, HUD, and win/lose game states. Built as a Visual Studio SFML project with Thor and yaml-cpp.',
-        tags: ['C++', 'SFML', 'Game Dev', 'AI', 'Level Loading', '2D'],
-        link: 'https://github.com/FilipRusiecki/ProjectsToShow/tree/main/TankGame',
         image: null,
       },
       {
@@ -140,7 +141,7 @@ const categories = [
           'A Counter-Strike 2 Workshop weapon finish in The Watcher series — engraved detailing with a dark, ominous theme. Self-taught CS2 skin art; about 8 favorites and ~600 Workshop views.',
         tags: ['CS2', 'Weapon Skin', 'Steam Workshop', 'P250', '8 Fav'],
         link: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3225420810',
-        image: null,
+        image: '/images/portfolio/P250%20The%20Watcher.jfif',
       },
       {
         id: 'cs-skin-m4a4-watcher-purple',
@@ -149,7 +150,7 @@ const categories = [
           'Purple colourway of The Watcher M4A4 finish — engraved detailing pitched as mysterious or “devil’s work.” Self-taught CS2 skin art; about 10 favorites and ~600 Workshop views.',
         tags: ['CS2', 'Weapon Skin', 'Steam Workshop', 'M4A4', '10 Fav'],
         link: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3223735520',
-        image: null,
+        image: '/images/portfolio/M4A4%20The%20Watcher%20(Purple).png',
       },
       {
         id: 'cs-skin-m4a4-watcher-aristocracy',
@@ -158,7 +159,7 @@ const categories = [
           'Aristocracy colourway of The Watcher M4A4 finish — engraved detailing with a refined colour scheme. Self-taught CS2 skin art; about 11 favorites and ~650 Workshop views.',
         tags: ['CS2', 'Weapon Skin', 'Steam Workshop', 'M4A4', '11 Fav'],
         link: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3223735173',
-        image: null,
+        image: '/images/portfolio/M4A4%20The%20Watcher%20(Aristocracy).png',
       },
       {
         id: 'cs-skin-m4a4-watcher-gold-black',
@@ -167,7 +168,7 @@ const categories = [
           'Gold and black colourway of The Watcher M4A4 finish — engraved detailing with a high-contrast look. Self-taught CS2 skin art; about 6 favorites and ~200 Workshop views.',
         tags: ['CS2', 'Weapon Skin', 'Steam Workshop', 'M4A4', '6 Fav'],
         link: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3223734762',
-        image: null,
+        image: '/images/portfolio/M4A4%20The%20Watcher%20(Gold%20Black).png',
       },
       {
         id: 'cs-skin-m4a4-watcher-green-white',
@@ -176,7 +177,7 @@ const categories = [
           'Green and white colourway of The Watcher M4A4 finish — engraved detailing across alternate schemes. Self-taught CS2 skin art; about 12 favorites and ~430 Workshop views.',
         tags: ['CS2', 'Weapon Skin', 'Steam Workshop', 'M4A4', '12 Fav'],
         link: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3223734266',
-        image: null,
+        image: '/images/portfolio/M4A4%20The%20Watcher%20(Green%20White).png',
       },
       {
         id: 'cs-skin-m4a4-watcher-green-black',
@@ -185,7 +186,7 @@ const categories = [
           'Green and black colourway of The Watcher M4A4 finish — engraved detailing with a sharp contrast palette. Self-taught CS2 skin art; about 6 favorites and ~110 Workshop views.',
         tags: ['CS2', 'Weapon Skin', 'Steam Workshop', 'M4A4', '6 Fav'],
         link: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3223733526',
-        image: null,
+        image: '/images/portfolio/M4A4%20The%20Watcher%20(Green%20Black).png',
       },
       {
         id: 'cs-skin-aug-midnight-mantle',
@@ -194,7 +195,7 @@ const categories = [
           'A Counter-Strike 2 Workshop AUG finish — a kitty-themed midnight skin. Self-taught CS2 weapon art with about 26 favorites and ~980 Workshop views.',
         tags: ['CS2', 'Weapon Skin', 'Steam Workshop', 'AUG', '26 Fav'],
         link: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3204406599',
-        image: null,
+        image: '/images/portfolio/AUG%20Midnight%20Mantle.jfif',
       },
       {
         id: 'cs-skin-famas-pearl-princess',
@@ -203,7 +204,7 @@ const categories = [
           'A Counter-Strike 2 Workshop FAMAS finish — pearly pastel metal plated onto a white base (“Save The Princess”). Self-taught CS2 weapon skin design submitted to the Steam Workshop.',
         tags: ['CS2', 'Weapon Skin', 'Steam Workshop', 'FAMAS'],
         link: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3211563073',
-        image: null,
+        image: '/images/portfolio/FAMAS%20%20Pearl%20Princess.jfif',
       },
       {
         id: 'cs-hide-seek-frugo',
@@ -212,7 +213,7 @@ const categories = [
           'A Counter-Strike 2 Hide and Seek Workshop map exploring CS2 mapping tools — hiding spots, teleports, and no fall damage. Self-taught CS2 level design with about 20.4K Workshop subscribers.',
         tags: ['CS2', 'Level Design', 'Steam Workshop', 'Hide and Seek', '20.4K Subs'],
         link: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3169731504',
-        image: null,
+        image: '/images/portfolio/Hide%20and%20Seek%20Frugo.jfif',
       },
       {
         id: 'cs-zombie-hill',
@@ -221,7 +222,7 @@ const categories = [
           'A Counter-Strike 2 Workshop map/gamemode where you fight up a hill against zombie terrorists, buying weapons to survive longer. Self-taught CS2 level design with about 35.9K Workshop subscribers.',
         tags: ['CS2', 'Level Design', 'Steam Workshop', 'Zombie', '35.9K Subs'],
         link: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3171183590',
-        image: null,
+        image: '/images/portfolio/Zombie%20Hill%20Gamemode.gif',
       },
       {
         id: 'cs-christmas-chaos',
@@ -230,7 +231,7 @@ const categories = [
           'A festive Counter-Strike Hide and Seek Workshop map with 76+ hiding spots, teleports, custom models, snow, snowballs, and a flying sleigh. Self-taught level design with about 9.5K Workshop subscribers.',
         tags: ['CS:GO', 'Level Design', 'Steam Workshop', 'Hide and Seek', '9.5K Subs'],
         link: 'https://steamcommunity.com/sharedfiles/filedetails/?id=2303607674',
-        image: null,
+        image: '/images/portfolio/Christmas%20Chaos%20%5BHide%20and%20Seek%5D.jfif',
       },
       {
         id: 'cs-anime-city',
@@ -239,7 +240,7 @@ const categories = [
           'A large Counter-Strike Hide and Seek Workshop map themed around anime — hiding spots, teleports, pink trees, moving anime cars, skyscrapers, and poster art. Self-taught level design with about 7.4K Workshop subscribers.',
         tags: ['CS:GO', 'Level Design', 'Steam Workshop', 'Hide and Seek', '7.4K Subs'],
         link: 'https://steamcommunity.com/sharedfiles/filedetails/?id=2258736328',
-        image: null,
+        image: '/images/portfolio/Anime%20City%20%5BHide%20and%20Seek%5D.jfif',
       },
       {
         id: 'cs-inthewoods',
@@ -260,19 +261,35 @@ const ProjectCard = ({ project, index }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay: Math.min(index * 0.06, 0.3) }}
-    className="group border-2 border-game-accent/25 rounded-lg overflow-hidden bg-game-dark hover:border-game-accent/60 transition-colors"
+    className="group flex flex-col border-2 border-game-accent/25 rounded-lg overflow-hidden bg-game-dark hover:border-game-accent/60 transition-colors"
   >
-    {project.image && (
-      <div className="aspect-video overflow-hidden border-b border-game-accent/20 bg-game-dark">
+    <div className="aspect-video overflow-hidden border-b border-game-accent/20 bg-gradient-to-br from-game-accent/15 via-game-dark to-game-dark relative">
+      {project.image ? (
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+          className={`w-full h-full group-hover:scale-[1.02] transition-transform duration-500 ${
+            project.imageFit === 'contain' ? 'object-contain bg-black/50' : 'object-cover'
+          }`}
         />
-      </div>
-    )}
-    <div className="p-6">
-      <h3 className="text-xl font-bold text-game-light mb-2">{project.title}</h3>
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center p-6">
+          <div className="text-center">
+            <p className="text-game-accent/40 text-xs font-semibold uppercase tracking-widest mb-2">
+              Screenshot coming soon
+            </p>
+            <p className="text-game-light/35 text-sm font-medium line-clamp-2">
+              {project.title}
+            </p>
+          </div>
+          <div className="absolute inset-0 opacity-[0.07] bg-[radial-gradient(circle_at_30%_20%,#fff,transparent_45%),radial-gradient(circle_at_80%_70%,var(--tw-gradient-stops))] from-game-accent to-transparent pointer-events-none" />
+        </div>
+      )}
+    </div>
+    <div className="p-6 flex flex-col flex-1">
+      <h3 className="text-xl font-bold text-game-light mb-2 group-hover:text-game-accent transition-colors">
+        {project.title}
+      </h3>
       {project.tags?.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-3">
           {project.tags.map((tag) => (
@@ -285,13 +302,15 @@ const ProjectCard = ({ project, index }) => (
           ))}
         </div>
       )}
-      <p className="text-game-light/75 leading-relaxed mb-4">{project.description}</p>
+      <p className="text-game-light/75 leading-relaxed mb-4 flex-1">
+        {project.description}
+      </p>
       {project.link && (
         <a
           href={project.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-game-accent font-semibold hover:text-game-accent/80 transition-colors"
+          className="inline-flex text-game-accent font-semibold hover:text-game-accent/80 transition-colors"
         >
           View project →
         </a>
