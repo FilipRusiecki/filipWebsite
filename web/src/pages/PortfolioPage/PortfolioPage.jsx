@@ -54,7 +54,7 @@ const categories = [
           'A C++ / SFML tank combat game with player and AI-controlled tanks, projectile pooling, oriented bounding-box collision, YAML-driven level loading, HUD, and win/lose game states. Built as a Visual Studio SFML project with Thor and yaml-cpp.',
         tags: ['C++', 'SFML', 'Game Dev', 'AI', 'Level Loading', '2D'],
         link: 'https://github.com/FilipRusiecki/ProjectsToShow/tree/main/TankGame',
-        image: null,
+        image: '/images/portfolio/TankGame.png',
       },
     ],
   },
@@ -107,7 +107,7 @@ const categories = [
           'A C++ game built with SFML and OpenGL (GLEW) where the world is made of cubes. Explores 3D math (vectors, matrices), cube rendering, game objects, and easing — a graphics-focused project blending SFML with OpenGL.',
         tags: ['C++', 'SFML', 'OpenGL', '3D Graphics', 'Game Dev'],
         link: 'https://github.com/FilipRusiecki/ProjectsToShow/tree/main/CubeField',
-        image: null,
+        image: '/images/portfolio/CubeField.png',
       },
       {
         id: 'cube-tower-jump',
@@ -125,7 +125,7 @@ const categories = [
           'A C++ / SFML top-down zombie survival shooter with round-based waves and grid pathfinding so zombies chase the player around the map. Also includes combat, pickups, menus, and character customization — built with a structured OOP design covering player, zombies, bullets, collision, consumables, and UI.',
         tags: ['C++', 'SFML', 'Game Dev', 'Pathfinding', 'AI', '2D'],
         link: 'https://github.com/FilipRusiecki/ProjectsToShow/tree/main/Zombie%20Game',
-        image: null,
+        image: '/images/portfolio/ZombieShooter.jpg',
       },
     ],
   },
@@ -249,13 +249,19 @@ const categories = [
           'A Counter-Strike Hide and Seek Workshop map with 60+ hiding spots, teleports, a secret admin room, a moving helicopter, fog, and nighttime lighting. Self-taught level design — about 4.2K Workshop subscribers.',
         tags: ['CS:GO', 'Level Design', 'Steam Workshop', 'Hide and Seek', '4.2K Subs'],
         link: 'https://steamcommunity.com/sharedfiles/filedetails/?id=2206692050',
-        image: null,
+        image: '/images/portfolio/InTheWoods.png',
       },
     ],
   },
 ]
 
-const ProjectCard = ({ project, index }) => (
+const projectInitials = (title) => {
+  const words = title.replace(/[|[\]]/g, ' ').split(/\s+/).filter(Boolean)
+  if (words.length === 1) return words[0].slice(0, 2).toUpperCase()
+  return (words[0][0] + words[1][0]).toUpperCase()
+}
+
+const ProjectCard = ({ project, index, categoryTitle }) => (
   <motion.article
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -273,16 +279,23 @@ const ProjectCard = ({ project, index }) => (
           }`}
         />
       ) : (
-        <div className="absolute inset-0 flex items-center justify-center p-6">
-          <div className="text-center">
-            <p className="text-game-accent/40 text-xs font-semibold uppercase tracking-widest mb-2">
-              Screenshot coming soon
-            </p>
-            <p className="text-game-light/35 text-sm font-medium line-clamp-2">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-game-accent/10 blur-2xl" />
+          <div className="absolute -bottom-12 -left-8 w-48 h-48 rounded-full bg-game-accent/5 blur-3xl" />
+          <div className="absolute inset-0 opacity-[0.06] bg-[linear-gradient(135deg,transparent_40%,#fff_50%,transparent_60%)]" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+            <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full border border-game-accent/35 bg-game-accent/10 text-game-accent text-xl font-bold tracking-wide group-hover:border-game-accent/60 transition-colors">
+              {projectInitials(project.title)}
+            </div>
+            <p className="text-game-light/85 font-semibold text-base leading-snug max-w-[90%]">
               {project.title}
             </p>
+            {categoryTitle && (
+              <p className="mt-2 text-game-accent/55 text-xs font-semibold uppercase tracking-widest">
+                {categoryTitle}
+              </p>
+            )}
           </div>
-          <div className="absolute inset-0 opacity-[0.07] bg-[radial-gradient(circle_at_30%_20%,#fff,transparent_45%),radial-gradient(circle_at_80%_70%,var(--tw-gradient-stops))] from-game-accent to-transparent pointer-events-none" />
         </div>
       )}
     </div>
@@ -412,6 +425,7 @@ const PortfolioPage = () => {
                     key={project.id || index}
                     project={project}
                     index={index}
+                    categoryTitle={category.title}
                   />
                 ))}
               </div>
