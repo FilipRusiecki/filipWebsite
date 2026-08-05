@@ -37,7 +37,8 @@ Do **not** use the Accelerate URL (`prisma+postgres://accelerate.prisma-data.net
 The admin was created against the same DB when you ran:
 
 ```bash
-yarn rw exec createAdmin --email fifuniek080@gmail.com --password YourPassword
+yarn rw exec createAdmin --email admin@example.com --password YourPassword
+
 ```
 
 with your local `.env` pointing at the **direct** Postgres URL. If DATABASE_URL on Vercel is that same URL, that admin user is the one used when you log in on the deployed site.

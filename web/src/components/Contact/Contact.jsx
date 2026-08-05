@@ -1,6 +1,6 @@
+import { Link, routes } from '@redwoodjs/router'
 import { motion } from 'framer-motion'
 
-import elogo from './email.png'
 const Contact = () => {
   return (
     <div>
@@ -14,22 +14,29 @@ const Contact = () => {
         }}
         className="font-general-semibold text-ternary-dark dark:text-primary-light mt-80 bg-slate-100 text-center text-2xl sm:text-center lg:text-3xl xl:text-4xl"
       >
-        My Contact
+        Contact
       </motion.h1>
-      <div className=" mb-4 ml-auto mr-auto mt-4 max-w-72 rounded-xl border-2 border-solid border-y-zinc-700  bg-gray-200 text-center align-middle">
-        <a
-          aria-label="Flow Algorithm with Heat Map"
-          href="mailto:fifuniek080@gmail.com"
-        >
-          <p className="-mt-4 mb-3 text-2xl">
-            <img
-              src={elogo}
-              className=" -mb-3 ml-auto mr-auto  mt-4 block h-14"
-              alt="email pic"
-            />
-            fifuniek080@gmail.com
-          </p>
-        </a>
+      <div className="mb-4 ml-auto mr-auto mt-4 max-w-72 rounded-xl border-2 border-solid border-y-zinc-700 bg-gray-200 p-4 text-center align-middle">
+        <p className="mb-3 text-base text-zinc-700">
+          Reach us via Discord or the Support page — no personal email listed
+          publicly.
+        </p>
+        <div className="flex flex-col gap-2">
+          <a
+            href="https://discord.gg/QgUmqpKvWJ"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-game-accent hover:underline"
+          >
+            Discord
+          </a>
+          <Link
+            to={routes.support()}
+            className="font-semibold text-game-accent hover:underline"
+          >
+            Support
+          </Link>
+        </div>
       </div>
     </div>
   )
