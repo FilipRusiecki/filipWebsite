@@ -7,14 +7,6 @@ import Navigation from 'src/components/Navigation/Navigation'
 import Footer from 'src/components/Footer/Footer'
 import SectionAtmosphere from 'src/components/SectionAtmosphere/SectionAtmosphere'
 
-import valentinesCarousel from '../../assets/images/updates/valentinesCarousel.png'
-import updateCarousel1 from '../../assets/images/updates/UpdateCarusle1.png'
-
-const UPDATE_IMAGE_BUNDLED = {
-  'valentinesCarousel.png': valentinesCarousel,
-  'UpdateCarusle1.png': updateCarousel1,
-}
-
 const UPDATES_QUERY = gql`
   query UpdatesQuery {
     updates {
@@ -32,14 +24,13 @@ const UPDATES_QUERY = gql`
 
 const resolveImage = (update) => {
   if (update.title?.includes('Valentine')) {
-    return valentinesCarousel || '/images/updates/valentinesCarousel.png'
+    return '/images/updates/valentinesCarousel.png'
   }
   if (update.title?.includes('Quests, Proximity Chat')) {
-    return updateCarousel1 || '/images/updates/UpdateCarusle1.png'
+    return '/images/updates/UpdateCarusle1.png'
   }
   if (update.image?.trim()) {
-    const key = update.image.trim()
-    return UPDATE_IMAGE_BUNDLED[key] || `/images/updates/${key}`
+    return `/images/updates/${update.image.trim()}`
   }
   return null
 }
