@@ -16,7 +16,8 @@ const CREATE_TICKET = gql`
   }
 `
 
-const TicketForm = ({ onSuccess }) => {
+const TicketForm = ({ onSuccess, ticketType = 'support' }) => {
+  const isBusiness = ticketType === 'business_inquiry'
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [email, setEmail] = useState('')
@@ -35,9 +36,9 @@ const TicketForm = ({ onSuccess }) => {
       }
       setCreatedTicketId(ticketId)
       setViewToken(viewToken || null)
-      setMessage({ 
-        type: 'success', 
-        text: 'Ticket submitted successfully! Save your ticket link below to track your ticket status.' 
+      setMessage({
+        type: 'success',
+        text: 'Ticket submitted successfully! Save your ticket link below to track your ticket status.',
       })
       setTitle('')
       setDescription('')
@@ -58,6 +59,11 @@ const TicketForm = ({ onSuccess }) => {
       setTimeout(() => setMessage(null), 3000)
       return
     }
+    if (isBusiness && !email.trim()) {
+      setMessage({ type: 'error', text: 'Please provide an email so we can reply to your enquiry.' })
+      setTimeout(() => setMessage(null), 3000)
+      return
+    }
 
     createTicket({
       variables: {
@@ -65,7 +71,7 @@ const TicketForm = ({ onSuccess }) => {
           title: title.trim(),
           description: description.trim(),
           email: email.trim() || null,
-          ticketType: 'support',
+          ticketType,
         },
       },
     })
@@ -88,7 +94,9 @@ const TicketForm = ({ onSuccess }) => {
     return (
       <div className="space-y-6">
         <div className="p-6 rounded-lg border-2 bg-green-500/20 border-green-500/50 text-center">
-          <div className="text-green-400 text-xl font-bold mb-4">Ticket Submitted Successfully!</div>
+          <div className="text-green-400 text-xl font-bold mb-4">
+            {isBusiness ? 'Enquiry Submitted Successfully!' : 'Ticket Submitted Successfully!'}
+          </div>
           <p className="text-game-light mb-4">
             Your ticket ID is <span className="text-game-accent font-mono font-bold">#{createdTicketId}</span>
           </p>
@@ -96,8 +104,8 @@ const TicketForm = ({ onSuccess }) => {
             Save this link to check your ticket status and view responses:
           </p>
           <div className="bg-game-dark/50 p-3 rounded-lg mb-4 break-all">
-            <a 
-              href={getTicketUrl()} 
+            <a
+              href={getTicketUrl()}
               className="text-game-accent hover:underline font-mono text-sm"
             >
               {getTicketUrl()}
@@ -114,7 +122,7 @@ const TicketForm = ({ onSuccess }) => {
               onClick={() => setCreatedTicketId(null)}
               className="bg-game-primary text-game-light px-4 py-2 rounded-lg font-semibold hover:bg-game-primary/80 transition-colors border border-game-accent/30"
             >
-              Submit Another Ticket
+              Submit Another
             </button>
           </div>
         </div>
@@ -137,7 +145,8 @@ const TicketForm = ({ onSuccess }) => {
       )}
       <div>
         <label htmlFor="title" className="block text-game-light font-semibold mb-2">
-          Title <span className="text-game-accent">*</span>
+          {isBusiness ? 'Project / Enquiry Title' : 'Title'}{' '}
+          <span className="text-game-accent">*</span>
         </label>
         <input
           type="text"
@@ -145,14 +154,18 @@ const TicketForm = ({ onSuccess }) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="w-full px-4 py-3 bg-game-dark border-2 border-game-accent/30 rounded-lg text-game-light focus:border-game-accent focus:outline-none transition-colors"
-          placeholder="Brief description of your issue or question"
+          placeholder={
+            isBusiness
+              ? 'e.g. Custom website for my business / brand'
+              : 'Brief description of your issue or question'
+          }
           required
         />
       </div>
 
       <div>
         <label htmlFor="description" className="block text-game-light font-semibold mb-2">
-          Description <span className="text-game-accent">*</span>
+          {isBusiness ? 'Details' : 'Description'} <span className="text-game-accent">*</span>
         </label>
         <textarea
           id="description"
@@ -160,14 +173,18 @@ const TicketForm = ({ onSuccess }) => {
           onChange={(e) => setDescription(e.target.value)}
           rows={6}
           className="w-full px-4 py-3 bg-game-dark border-2 border-game-accent/30 rounded-lg text-game-light focus:border-game-accent focus:outline-none transition-colors resize-none"
-          placeholder="Please provide as much detail as possible about your issue, bug report, or question..."
+          placeholder={
+            isBusiness
+              ? 'Tell us what you need — custom website, portfolio, brand site, timeline, budget range, and any links or references...'
+              : 'Please provide as much detail as possible about your issue, bug report, or question...'
+          }
           required
         />
       </div>
 
       <div>
         <label htmlFor="email" className="block text-game-light font-semibold mb-2">
-          Email (Optional)
+          Email {isBusiness ? <span className="text-game-accent">*</span> : '(Optional)'}
         </label>
         <input
           type="email"
@@ -176,9 +193,12 @@ const TicketForm = ({ onSuccess }) => {
           onChange={(e) => setEmail(e.target.value)}
           className="w-full px-4 py-3 bg-game-dark border-2 border-game-accent/30 rounded-lg text-game-light focus:border-game-accent focus:outline-none transition-colors"
           placeholder="your.email@example.com"
+          required={isBusiness}
         />
         <p className="text-sm text-game-light/60 mt-2">
-          Providing your email allows us to respond directly to your ticket.
+          {isBusiness
+            ? 'Required so we can follow up on your enquiry.'
+            : 'Providing your email allows us to respond directly to your ticket.'}
         </p>
       </div>
 
@@ -187,7 +207,7 @@ const TicketForm = ({ onSuccess }) => {
         disabled={loading}
         className="w-full bg-game-accent text-game-dark px-6 py-3 rounded-lg font-bold text-lg hover:bg-game-accent/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {loading ? 'Submitting...' : 'Submit Ticket'}
+        {loading ? 'Submitting...' : isBusiness ? 'Submit Enquiry' : 'Submit Ticket'}
       </button>
     </form>
   )

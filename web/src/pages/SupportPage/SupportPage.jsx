@@ -83,7 +83,7 @@ const SupportPage = () => {
   const id = useTicketId()
   const token = useViewToken()
   const [showNewTicket, setShowNewTicket] = useState(!id)
-  const [ticketType, setTicketType] = useState('support') // 'support' or 'bug_report'
+  const [ticketType, setTicketType] = useState('support') // support | bug_report
 
   useEffect(() => {
     setShowNewTicket(!id)
@@ -140,7 +140,7 @@ const SupportPage = () => {
               Support & Bug Reports
             </h1>
             <p className="text-xl text-game-light/80 max-w-2xl mx-auto mb-6">
-              Found a bug? Have a question? Need help? Submit a ticket and we'll get back to you!
+              Found a bug? Have a question? Need help? Submit a ticket and we&apos;ll get back to you!
             </p>
             {showNewTicket && !id && (
               <div className="flex flex-wrap gap-4 justify-center mb-8">
@@ -210,7 +210,7 @@ const SupportPage = () => {
               ) : (
                 <div className="bg-game-dark border-2 border-game-accent/30 rounded-lg p-12 text-center">
                   <p className="text-game-light/60 text-lg mb-6">
-                    Create a new support ticket or bug report. You'll receive a link to track your ticket.
+                    Create a new support ticket or bug report. You&apos;ll receive a link to track your ticket.
                   </p>
                   <button
                     onClick={() => {

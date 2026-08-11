@@ -37,7 +37,11 @@ const TicketList = ({ tickets }) => {
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-xs font-semibold text-game-accent">
-                  {ticket.ticketType === 'bug_report' ? '🐛' : '💬'}
+                  {ticket.ticketType === 'bug_report'
+                    ? '🐛'
+                    : ticket.ticketType === 'business_inquiry'
+                      ? '💼'
+                      : '💬'}
                 </span>
                 <h3 className="text-xl font-bold text-game-light">{ticket.title}</h3>
               </div>

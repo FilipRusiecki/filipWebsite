@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
+import SectionAtmosphere from 'src/components/SectionAtmosphere/SectionAtmosphere'
+
 const ScreenshotGallery = ({ screenshots = [] }) => {
   const [selectedIndex, setSelectedIndex] = useState(null)
 
-  // Real game screenshots
   const defaultScreenshots = [
     {
       id: 1,
@@ -41,57 +42,81 @@ const ScreenshotGallery = ({ screenshots = [] }) => {
   const images = screenshots.length > 0 ? screenshots : defaultScreenshots
 
   return (
-    <section className="py-12 md:py-20 bg-game-dark">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 md:mb-12 text-game-light">
-          Game Screenshots
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+    <section className="relative overflow-hidden py-14 md:py-20 border-t border-game-accent/15">
+      <SectionAtmosphere intensity="mid" grid />
+      <div className="relative container mx-auto px-4 max-w-6xl">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-8 md:mb-10"
+        >
+          <p className="text-game-accent font-semibold tracking-[0.18em] uppercase text-xs mb-3">
+            In-game
+          </p>
+          <h2 className="text-3xl md:text-5xl font-bold text-game-light mb-3">
+            Screenshots
+          </h2>
+          <p className="text-game-light/65 text-lg max-w-xl mx-auto">
+            Retro chaos in motion — click any shot to go fullscreen.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
           {images.map((screenshot, index) => (
-            <motion.div
+            <motion.button
+              type="button"
               key={screenshot.id || index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="cursor-pointer overflow-hidden rounded-lg border-2 border-game-accent/30 hover:border-game-accent transition-all"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-30px' }}
+              transition={{ duration: 0.5, delay: Math.min(index * 0.07, 0.35) }}
+              className={`group relative overflow-hidden border border-game-accent/25 hover:border-game-accent/70 transition-all duration-300 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-game-accent ${
+                index === 0 ? 'sm:col-span-2 lg:col-span-2 lg:row-span-2' : ''
+              }`}
               onClick={() => setSelectedIndex(index)}
             >
               <img
                 src={screenshot.url}
                 alt={screenshot.alt}
-                className="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover hover:scale-110 transition-transform duration-300"
+                className={`w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
+                  index === 0
+                    ? 'h-56 sm:h-72 md:h-full md:min-h-[22rem] lg:min-h-[28rem]'
+                    : 'h-44 sm:h-52 md:h-56'
+                }`}
                 loading="lazy"
               />
-            </motion.div>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-game-dark/50 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+            </motion.button>
           ))}
         </div>
 
-        {/* Lightbox Modal */}
         <AnimatePresence>
           {selectedIndex !== null && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/92 z-50 flex items-center justify-center p-4"
               onClick={() => setSelectedIndex(null)}
             >
               <motion.div
-                initial={{ scale: 0.8 }}
-                animate={{ scale: 1 }}
-                exit={{ scale: 0.8 }}
+                initial={{ scale: 0.92, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.92, opacity: 0 }}
                 className="relative max-w-6xl max-h-[90vh] w-full"
                 onClick={(e) => e.stopPropagation()}
               >
                 <img
                   src={images[selectedIndex].url}
                   alt={images[selectedIndex].alt}
-                  className="max-w-full max-h-[90vh] w-full h-auto object-contain rounded-lg"
+                  className="max-w-full max-h-[90vh] w-full h-auto object-contain"
                 />
                 <button
+                  type="button"
                   onClick={() => setSelectedIndex(null)}
-                  className="absolute top-2 right-2 md:top-4 md:right-4 bg-game-accent text-game-dark w-10 h-10 md:w-12 md:h-12 rounded-full font-bold text-xl md:text-2xl hover:bg-game-accent/90 transition-colors flex items-center justify-center"
+                  className="absolute top-2 right-2 md:top-4 md:right-4 bg-game-accent text-game-dark w-10 h-10 md:w-12 md:h-12 font-bold text-xl md:text-2xl hover:bg-game-accent/90 transition-colors flex items-center justify-center"
                   aria-label="Close"
                 >
                   ×

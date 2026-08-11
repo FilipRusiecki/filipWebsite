@@ -5,7 +5,7 @@ const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <nav className="bg-game-dark border-b-2 border-game-accent/30 sticky top-0 z-50">
+    <nav className="bg-game-dark/90 backdrop-blur-md border-b border-game-accent/30 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link
@@ -42,28 +42,26 @@ const Navigation = () => {
               About
             </Link>
             <Link
-              to={routes.cosmetics()}
-              className="text-game-light hover:text-game-accent transition-colors font-semibold text-sm xl:text-base"
-            >
-              Cosmetics
-            </Link>
-            <Link
-              to={routes.achievements()}
-              className="text-game-light hover:text-game-accent transition-colors font-semibold text-sm xl:text-base"
-            >
-              Achievements
-            </Link>
-            <Link
               to={routes.support()}
               className="text-game-light hover:text-game-accent transition-colors font-semibold text-sm xl:text-base"
             >
               Support
             </Link>
+            <Link
+              to={routes.businessEnquiry()}
+              className="relative group overflow-hidden border border-game-accent/60 text-game-accent px-3.5 xl:px-4 py-1.5 rounded-lg font-bold text-sm xl:text-base transition-all duration-300 hover:border-game-accent hover:text-game-dark hover:scale-[1.03] hover:shadow-[0_0_24px_-4px_rgba(209,173,74,0.55)]"
+            >
+              <span
+                className="pointer-events-none absolute inset-0 -translate-x-full bg-game-accent transition-transform duration-300 ease-out group-hover:translate-x-0"
+                aria-hidden="true"
+              />
+              <span className="relative z-10">Business</span>
+            </Link>
             <a
               href="https://store.steampowered.com/app/4152100/Play_With_Friends/"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-game-accent text-game-dark px-3 xl:px-4 py-2 rounded-lg font-bold hover:bg-game-accent/90 transition-all duration-300 text-sm xl:text-base"
+              className="relative overflow-hidden bg-game-accent text-game-dark px-3.5 xl:px-5 py-1.5 rounded-lg font-bold text-sm xl:text-base transition-all duration-300 hover:scale-[1.04] shadow-[0_0_20px_-4px_rgba(209,173,74,0.45)] hover:shadow-[0_0_32px_-2px_rgba(209,173,74,0.7)] hover:brightness-110"
             >
               Steam
             </a>
@@ -133,31 +131,28 @@ const Navigation = () => {
                 About
               </Link>
               <Link
-                to={routes.cosmetics()}
-                onClick={() => setIsMenuOpen(false)}
-                className="text-game-light hover:text-game-accent transition-colors font-semibold py-2 px-4"
-              >
-                Cosmetics
-              </Link>
-              <Link
-                to={routes.achievements()}
-                onClick={() => setIsMenuOpen(false)}
-                className="text-game-light hover:text-game-accent transition-colors font-semibold py-2 px-4"
-              >
-                Achievements
-              </Link>
-              <Link
                 to={routes.support()}
                 onClick={() => setIsMenuOpen(false)}
                 className="text-game-light hover:text-game-accent transition-colors font-semibold py-2 px-4"
               >
                 Support
               </Link>
+              <Link
+                to={routes.businessEnquiry()}
+                onClick={() => setIsMenuOpen(false)}
+                className="relative group overflow-hidden mx-4 mt-1 border border-game-accent/60 text-game-accent text-center py-2.5 rounded-lg font-bold transition-all duration-300 hover:border-game-accent hover:text-game-dark"
+              >
+                <span
+                  className="pointer-events-none absolute inset-0 -translate-x-full bg-game-accent transition-transform duration-300 ease-out group-hover:translate-x-0"
+                  aria-hidden="true"
+                />
+                <span className="relative z-10">Business</span>
+              </Link>
               <a
                 href="https://store.steampowered.com/app/4152100/Play_With_Friends/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-game-accent text-game-dark px-4 py-2 rounded-lg font-bold hover:bg-game-accent/90 transition-all duration-300 text-center mt-2"
+                className="mx-4 bg-game-accent text-game-dark py-2.5 rounded-lg font-bold text-center transition-all duration-300 shadow-[0_0_20px_-4px_rgba(209,173,74,0.45)] hover:shadow-[0_0_28px_-2px_rgba(209,173,74,0.65)] hover:brightness-110"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Steam

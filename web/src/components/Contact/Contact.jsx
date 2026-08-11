@@ -18,8 +18,8 @@ const Contact = () => {
       </motion.h1>
       <div className="mb-4 ml-auto mr-auto mt-4 max-w-72 rounded-xl border-2 border-solid border-y-zinc-700 bg-gray-200 p-4 text-center align-middle">
         <p className="mb-3 text-base text-zinc-700">
-          Reach us via Discord or the Support page — no personal email listed
-          publicly.
+          Reach us via Discord, Support, or Business Enquiry — no personal email
+          listed publicly.
         </p>
         <div className="flex flex-col gap-2">
           <a
@@ -35,6 +35,12 @@ const Contact = () => {
             className="font-semibold text-game-accent hover:underline"
           >
             Support
+          </Link>
+          <Link
+            to={routes.businessEnquiry()}
+            className="font-semibold text-game-accent hover:underline"
+          >
+            Business Enquiry
           </Link>
         </div>
       </div>

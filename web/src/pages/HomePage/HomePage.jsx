@@ -6,7 +6,6 @@ import Hero from 'src/components/Hero/Hero'
 import StorySection from 'src/components/StorySection/StorySection'
 import FeaturesSection from 'src/components/FeaturesSection/FeaturesSection'
 import ScreenshotGallery from 'src/components/ScreenshotGallery/ScreenshotGallery'
-import RecentUpdateSummary from 'src/components/RecentUpdateSummary/RecentUpdateSummary'
 import WishlistCTA from 'src/components/WishlistCTA/WishlistCTA'
 import EarlyAccessInfo from 'src/components/EarlyAccessInfo/EarlyAccessInfo'
 import MatureContentNotice from 'src/components/MatureContentNotice/MatureContentNotice'
@@ -22,7 +21,6 @@ const HomePage = () => {
       <div className="dark bg-game-dark min-h-screen">
         <Navigation />
         <Hero />
-        <RecentUpdateSummary />
         <StorySection />
         <FeaturesSection />
         <ScreenshotGallery />

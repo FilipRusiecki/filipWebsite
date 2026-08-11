@@ -150,6 +150,30 @@ const AdminDashboardPage = () => {
   const openTickets = data?.tickets?.filter((t) => t.status === 'open').length || 0
   const bugReports = data?.tickets?.filter((t) => t.ticketType === 'bug_report').length || 0
   const supportTickets = data?.tickets?.filter((t) => t.ticketType === 'support').length || 0
+  const businessInquiries =
+    data?.tickets?.filter((t) => t.ticketType === 'business_inquiry').length || 0
+
+  const getTicketTypeLabel = (type) => {
+    switch (type) {
+      case 'bug_report':
+        return '🐛 Bug Report'
+      case 'business_inquiry':
+        return '💼 Business Enquiry'
+      default:
+        return '💬 Support'
+    }
+  }
+
+  const getTicketTypeEmoji = (type) => {
+    switch (type) {
+      case 'bug_report':
+        return '🐛'
+      case 'business_inquiry':
+        return '💼'
+      default:
+        return '💬'
+    }
+  }
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -190,7 +214,7 @@ const AdminDashboardPage = () => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
               <div className="bg-game-dark border-2 border-game-accent/30 rounded-lg p-6">
                 <div className="text-game-light/60 text-sm mb-1">Total Tickets</div>
                 <div className="text-3xl font-bold text-game-light">
@@ -206,8 +230,12 @@ const AdminDashboardPage = () => {
                 <div className="text-3xl font-bold text-game-light">{bugReports}</div>
               </div>
               <div className="bg-game-dark border-2 border-game-accent/30 rounded-lg p-6">
-                <div className="text-game-light/60 text-sm mb-1">Support Tickets</div>
+                <div className="text-game-light/60 text-sm mb-1">Support</div>
                 <div className="text-3xl font-bold text-game-light">{supportTickets}</div>
+              </div>
+              <div className="bg-game-dark border-2 border-game-accent/30 rounded-lg p-6">
+                <div className="text-game-light/60 text-sm mb-1">Business</div>
+                <div className="text-3xl font-bold text-game-light">{businessInquiries}</div>
               </div>
             </div>
 
@@ -232,6 +260,7 @@ const AdminDashboardPage = () => {
                 <option value="all">All Types</option>
                 <option value="support">Support</option>
                 <option value="bug_report">Bug Reports</option>
+                <option value="business_inquiry">Business Enquiries</option>
               </select>
             </div>
 
@@ -264,7 +293,7 @@ const AdminDashboardPage = () => {
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-1">
                                 <span className="text-xs">
-                                  {ticket.ticketType === 'bug_report' ? '🐛' : '💬'}
+                                  {getTicketTypeEmoji(ticket.ticketType)}
                                 </span>
                                 <span className="text-sm font-bold text-game-light line-clamp-1">
                                   {ticket.title}
@@ -299,7 +328,7 @@ const AdminDashboardPage = () => {
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
                             <span className="px-3 py-1 rounded-full text-xs font-semibold bg-game-accent/20 text-game-accent border border-game-accent/50">
-                              {selectedTicket.ticketType === 'bug_report' ? '🐛 Bug Report' : '💬 Support'}
+                              {getTicketTypeLabel(selectedTicket.ticketType)}
                             </span>
                             <h2 className="text-2xl font-bold text-game-light">
                               {selectedTicket.title}

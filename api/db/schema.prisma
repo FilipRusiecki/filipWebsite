@@ -40,7 +40,7 @@ model Ticket {
   userId            Int?      // User ID if ticket was created by logged-in user
   user              User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
   viewToken         String?   // Secret token for link-based access; only holders of the link can view
-  ticketType        String    @default("support") // support, bug_report
+  ticketType        String    @default("support") // support, bug_report, business_inquiry
   status            String    @default("open") // open, in_progress, resolved, closed
   // Bug Report Specific Fields
   gameVersion       String?  // Version of the game where bug occurred

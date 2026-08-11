@@ -66,6 +66,12 @@ const Footer = () => {
             >
               Support
             </Link>
+            <Link
+              to={routes.businessEnquiry()}
+              className="text-game-light/60 hover:text-game-accent transition-colors text-sm"
+            >
+              Business
+            </Link>
           </div>
         </div>
         <div className="mt-4 text-center text-game-light/40 text-xs">

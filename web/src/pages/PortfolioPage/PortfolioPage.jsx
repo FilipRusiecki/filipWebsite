@@ -72,6 +72,7 @@ const skillGroups = [
       'Java',
       'Lua',
       'Flask',
+      'RedwoodJS',
       'HTML / CSS',
       'YAML',
       'SFML',
@@ -196,7 +197,7 @@ const categories = [
     id: 'games',
     title: 'Games & Experiences',
     description:
-      'Shipped titles, jam games, VR, mods, and prototypes — playable work across engines and platforms.',
+      'Shipped titles, client websites, jam games, VR, mods, and prototypes — work across engines and the web.',
     projects: [
       {
         id: 'winter-wonder-vr',
@@ -207,6 +208,25 @@ const categories = [
         link: 'https://github.com/FilipRusiecki/FinalYearProject',
         video: 'https://youtu.be/jDkfWm-pjDg',
         image: '/images/portfolio/WinterWonder.png',
+      },
+      {
+        id: 'kotrina-art-website',
+        title: 'kotrina.art',
+        description:
+          'Custom artist website for Kotrina Cioladis — portfolio gallery, workshops, Art Club, and about/contact. Built with RedwoodJS, React, and Tailwind; designed around her brand (typography, parchment UI, coral accents) and shipped to Vercel at kotrina.art.',
+        tags: ['RedwoodJS', 'React', 'Tailwind', 'Client Site', 'Vercel'],
+        link: 'https://kotrina.art',
+        image: '/images/portfolio/KotrinaArt.jpg',
+      },
+      {
+        id: 'frvg-website',
+        title: 'FRVG / Play With Friends Site',
+        description:
+          'Full-stack marketing and support platform for Filip Rusiecki Video Games — updates feed, FAQ, cosmetics, achievements, ticket support, and dbAuth admin. Built with RedwoodJS, React, GraphQL, Prisma/PostgreSQL, and Tailwind; deployed on Vercel at frvg.net.',
+        tags: ['RedwoodJS', 'React', 'GraphQL', 'Prisma', 'Vercel'],
+        link: 'https://www.frvg.net',
+        image: '/images/logos/FRVGLOGOtransperant.png',
+        imageFit: 'contain',
       },
       {
         id: 'cube-slayer',

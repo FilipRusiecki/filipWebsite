@@ -1,9 +1,14 @@
 import { motion } from 'framer-motion'
 
+import SectionAtmosphere from 'src/components/SectionAtmosphere/SectionAtmosphere'
+import SteamWishlistButton from 'src/components/SteamWishlistButton/SteamWishlistButton'
+
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-game-dark text-game-light">
-      <div className="container mx-auto px-4 py-20 text-center">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-game-dark text-game-light">
+      <SectionAtmosphere intensity="strong" pulse grid />
+
+      <div className="relative container mx-auto px-4 py-20 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -31,20 +36,17 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-game-light/80 max-w-2xl mx-auto px-4"
           >
-            Survive the apocalypse, grow stronger, and prove you're more than just drunk cave friends.
-            Or just dance on your enemies. Either way, it's chaos.
+            Survive the apocalypse, grow stronger, and prove you&apos;re more than just drunk cave friends.
+            Or just dance on your enemies. Either way, it&apos;s chaos.
           </motion.p>
-          <motion.a
-            initial={{ opacity: 0, scale: 0.9 }}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            href="https://store.steampowered.com/app/4152100/Play_With_Friends/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-game-accent text-game-dark px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-lg sm:text-xl font-bold hover:bg-game-accent/90 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            transition={{ duration: 0.5, delay: 0.55 }}
+            className="flex justify-center"
           >
-            Wishlist on Steam
-          </motion.a>
+            <SteamWishlistButton size="lg" />
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -92,7 +92,11 @@ const TicketView = ({ ticket, onUpdate }) => {
         </div>
         <div className="flex items-center gap-2 mb-4 flex-wrap">
           <span className="px-3 py-1 rounded-full text-xs font-semibold bg-game-accent/20 text-game-accent border border-game-accent/50">
-            {ticket.ticketType === 'bug_report' ? '🐛 Bug Report' : '💬 Support'}
+            {ticket.ticketType === 'bug_report'
+              ? '🐛 Bug Report'
+              : ticket.ticketType === 'business_inquiry'
+                ? '💼 Business Enquiry'
+                : '💬 Support'}
           </span>
         </div>
         <div className="text-sm text-game-light/60 mb-4">
