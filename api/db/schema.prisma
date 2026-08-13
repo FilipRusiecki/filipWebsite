@@ -99,3 +99,42 @@ model BusinessReview {
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 }
+
+// Admin: saved client quotes / projects for billing & feature tracking
+model ClientProject {
+  id             Int                    @id @default(autoincrement())
+  clientName     String
+  projectName    String
+  notes          String?
+  // quote | one_time | active | returning | past | paused
+  status         String                 @default("quote")
+  // unpaid | paid_in_full
+  paymentStatus  String                 @default("unpaid")
+  receiptCode    String?                @unique // public verify stamp code
+  paidAt         DateTime?
+  paidAmount     Float?
+  nextChargeDate DateTime?
+  lastChargedAt  DateTime?
+  domainRenewalDate DateTime? // reminder: when this client's domain renews
+  calcJson       String                 // full pricing calculator state JSON
+  oneTimeTotal   Float                  @default(0)
+  monthlyTotal   Float                  @default(0)
+  firstYearTotal Float                  @default(0)
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+  features       ClientProjectFeature[]
+}
+
+model ClientProjectFeature {
+  id          Int           @id @default(autoincrement())
+  projectId   Int
+  project     ClientProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name        String
+  hours       Float         @default(0)
+  rate        Float         @default(0)
+  amount      Float         @default(0)
+  done        Boolean       @default(false)
+  doneAt      DateTime?
+  note        String?
+  createdAt   DateTime      @default(now())
+}

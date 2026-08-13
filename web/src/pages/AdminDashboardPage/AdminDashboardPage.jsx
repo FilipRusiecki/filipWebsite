@@ -9,6 +9,8 @@ import { motion } from 'framer-motion'
 import Navigation from 'src/components/Navigation/Navigation'
 import Footer from 'src/components/Footer/Footer'
 import AdminReviewsPanel from 'src/components/AdminReviewsPanel/AdminReviewsPanel'
+import AdminPricingCalculator from 'src/components/AdminPricingCalculator/AdminPricingCalculator'
+import AdminClientsPanel from 'src/components/AdminClientsPanel/AdminClientsPanel'
 
 const TICKETS_QUERY = gql`
   query AdminTicketsQuery {
@@ -77,7 +79,8 @@ const AdminDashboardPage = () => {
   const [typeFilter, setTypeFilter] = useState('all')
   const [replyContent, setReplyContent] = useState('')
   const [showReplyForm, setShowReplyForm] = useState(false)
-  const [adminTab, setAdminTab] = useState('tickets') // tickets | reviews
+  const [adminTab, setAdminTab] = useState('tickets') // tickets | reviews | pricing | clients
+  const [loadProjectId, setLoadProjectId] = useState(null)
   const hasNavigated = useRef(false)
 
   // Redirect if not authenticated or not admin (using useEffect to avoid render-time navigation)
@@ -239,10 +242,44 @@ const AdminDashboardPage = () => {
               >
                 Reviews
               </button>
+              <button
+                type="button"
+                onClick={() => setAdminTab('pricing')}
+                className={`px-5 py-2.5 rounded-lg font-bold transition-all ${
+                  adminTab === 'pricing'
+                    ? 'bg-game-accent text-game-dark'
+                    : 'border-2 border-game-accent/30 text-game-light hover:border-game-accent'
+                }`}
+              >
+                Pricing
+              </button>
+              <button
+                type="button"
+                onClick={() => setAdminTab('clients')}
+                className={`px-5 py-2.5 rounded-lg font-bold transition-all ${
+                  adminTab === 'clients'
+                    ? 'bg-game-accent text-game-dark'
+                    : 'border-2 border-game-accent/30 text-game-light hover:border-game-accent'
+                }`}
+              >
+                Clients
+              </button>
             </div>
 
             {adminTab === 'reviews' ? (
               <AdminReviewsPanel />
+            ) : adminTab === 'pricing' ? (
+              <AdminPricingCalculator
+                loadProjectId={loadProjectId}
+                onProjectLoaded={() => setLoadProjectId(null)}
+              />
+            ) : adminTab === 'clients' ? (
+              <AdminClientsPanel
+                onOpenInCalculator={(id) => {
+                  setLoadProjectId(id)
+                  setAdminTab('pricing')
+                }}
+              />
             ) : (
               <>
             {/* Stats */}
