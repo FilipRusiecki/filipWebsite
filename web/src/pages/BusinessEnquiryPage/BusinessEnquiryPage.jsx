@@ -134,118 +134,121 @@ const BusinessEnquiryPage = () => {
           </div>
         </section>
 
-        {/* What we build — one job, no card chrome */}
-        <section className="relative py-16 md:py-24 border-t border-game-accent/15">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.6 }}
-              className="mb-12 md:mb-16"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-game-light mb-3">
-                What you can enquire about
-              </h2>
-              <p className="text-game-light/70 text-lg max-w-xl">
-                Clear scope, designed around your brand — not a generic site builder look.
-              </p>
-            </motion.div>
-            <div className="space-y-10 md:space-y-12">
-              {offerings.map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, x: -16 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.5, delay: index * 0.08 }}
-                  className="grid grid-cols-[auto_1fr] gap-5 md:gap-8 items-start border-l-2 border-game-accent/40 pl-5 md:pl-8"
-                >
-                  <span className="text-game-accent font-mono text-sm pt-1 tabular-nums">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-bold text-game-light mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-game-light/70 text-base md:text-lg leading-relaxed max-w-2xl">
-                      {item.line}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-            <motion.p
-              className="mt-14 text-game-light/55 text-sm md:text-base"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              Recent client work:{' '}
-              <a
-                href="https://kotrina.art"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-game-accent hover:underline font-semibold"
-              >
-                kotrina.art
-              </a>
-              {' · '}
-              <Link to={routes.portfolio()} className="text-game-accent hover:underline font-semibold">
-                Full portfolio
-              </Link>
-            </motion.p>
-          </div>
-        </section>
-
-        {/* Form */}
+        {/* Offerings + form side by side */}
         <section
           id="enquiry-form"
-          className="relative py-16 md:py-24 border-t border-game-accent/15 scroll-mt-20"
+          className="relative py-14 md:py-20 border-t border-game-accent/15 scroll-mt-20"
         >
           <div
             className="pointer-events-none absolute inset-0 opacity-80"
             aria-hidden="true"
             style={{
               background:
-                'radial-gradient(ellipse 60% 50% at 50% 0%, rgba(209,173,74,0.12), transparent 60%)',
+                'radial-gradient(ellipse 60% 50% at 70% 0%, rgba(209,173,74,0.1), transparent 55%)',
             }}
           />
-          <div className="relative container mx-auto px-4 max-w-2xl">
-            <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.65 }}
-              className="text-center mb-10"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-game-light mb-3">
-                Tell us about your project
-              </h2>
-              <p className="text-game-light/70 text-lg">
-                Share goals, timeline, and links — email required so we can reply.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.65, delay: 0.1 }}
-              className="border-2 border-game-accent/35 bg-game-dark/80 backdrop-blur-sm p-6 md:p-10 rounded-lg shadow-[0_0_60px_-20px_rgba(209,173,74,0.35)]"
-            >
-              <TicketForm
-                onSuccess={handleEnquiryCreated}
-                ticketType="business_inquiry"
-              />
-            </motion.div>
-            <p className="text-center text-sm text-game-light/45 mt-8">
-              Game bugs or player help? Use{' '}
-              <Link to={routes.support()} className="text-game-accent/80 hover:text-game-accent hover:underline">
-                Support
-              </Link>{' '}
-              instead.
-            </p>
+          <div className="relative container mx-auto px-4 max-w-6xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 xl:gap-16 items-start">
+              {/* Left: what you can enquire about */}
+              <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.55 }}
+                  className="mb-8"
+                >
+                  <h2 className="text-3xl md:text-4xl font-bold text-game-light mb-3">
+                    What you can enquire about
+                  </h2>
+                  <p className="text-game-light/70 text-base md:text-lg max-w-md">
+                    Clear scope, designed around your brand — not a generic site builder look.
+                  </p>
+                </motion.div>
+                <div className="space-y-7 md:space-y-8">
+                  {offerings.map((item, index) => (
+                    <motion.div
+                      key={item.title}
+                      initial={{ opacity: 0, x: -12 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: '-30px' }}
+                      transition={{ duration: 0.45, delay: index * 0.05 }}
+                      className="grid grid-cols-[auto_1fr] gap-4 items-start border-l-2 border-game-accent/40 pl-4 md:pl-5"
+                    >
+                      <span className="text-game-accent font-mono text-xs pt-1 tabular-nums">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <div>
+                        <h3 className="text-lg md:text-xl font-bold text-game-light mb-1.5">
+                          {item.title}
+                        </h3>
+                        <p className="text-game-light/65 text-sm md:text-base leading-relaxed">
+                          {item.line}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+                <motion.p
+                  className="mt-10 text-game-light/50 text-sm"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.15 }}
+                >
+                  Recent client work:{' '}
+                  <a
+                    href="https://kotrina.art"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-game-accent hover:underline font-semibold"
+                  >
+                    kotrina.art
+                  </a>
+                  {' · '}
+                  <Link
+                    to={routes.portfolio()}
+                    className="text-game-accent hover:underline font-semibold"
+                  >
+                    Full portfolio
+                  </Link>
+                </motion.p>
+              </div>
+
+              {/* Right: enquiry form */}
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.55, delay: 0.08 }}
+                className="lg:sticky lg:top-24"
+              >
+                <div className="mb-5">
+                  <h2 className="text-2xl md:text-3xl font-bold text-game-light mb-2">
+                    Tell us about your project
+                  </h2>
+                  <p className="text-game-light/65 text-sm md:text-base">
+                    Goals, timeline, links — email required so we can reply.
+                  </p>
+                </div>
+                <div className="border-2 border-game-accent/35 bg-game-dark/80 backdrop-blur-sm p-5 md:p-7 rounded-lg shadow-[0_0_50px_-20px_rgba(209,173,74,0.35)]">
+                  <TicketForm
+                    onSuccess={handleEnquiryCreated}
+                    ticketType="business_inquiry"
+                  />
+                </div>
+                <p className="text-center text-xs text-game-light/40 mt-5">
+                  Game bugs or player help? Use{' '}
+                  <Link
+                    to={routes.support()}
+                    className="text-game-accent/80 hover:text-game-accent hover:underline"
+                  >
+                    Support
+                  </Link>{' '}
+                  instead.
+                </p>
+              </motion.div>
+            </div>
           </div>
         </section>
 
