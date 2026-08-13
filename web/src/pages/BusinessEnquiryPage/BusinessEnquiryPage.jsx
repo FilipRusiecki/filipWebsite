@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Navigation from 'src/components/Navigation/Navigation'
 import Footer from 'src/components/Footer/Footer'
 import TicketForm from 'src/components/TicketForm/TicketForm'
+import BusinessReviewsSection from 'src/components/BusinessReviewsSection/BusinessReviewsSection'
 
 const offerings = [
   {
@@ -18,6 +19,10 @@ const offerings = [
   {
     title: 'Full-stack when you need it',
     line: 'Forms, tickets, updates, auth, and admin — the same stack behind frvg.net and client sites.',
+  },
+  {
+    title: 'Ongoing maintenance',
+    line: 'We keep your site healthy while it’s built and after launch — updates, fixes, content tweaks, and peace of mind.',
   },
 ]
 
@@ -243,6 +248,8 @@ const BusinessEnquiryPage = () => {
             </p>
           </div>
         </section>
+
+        <BusinessReviewsSection />
 
         <Footer />
       </div>

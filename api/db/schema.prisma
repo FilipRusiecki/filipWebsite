@@ -76,3 +76,26 @@ model Update {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+// Business page: invite-only client reviews
+model ReviewInvite {
+  id        Int       @id @default(autoincrement())
+  code      String    @unique
+  label     String?   // optional note e.g. client name / project
+  used      Boolean   @default(false)
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+  review    BusinessReview?
+}
+
+model BusinessReview {
+  id          Int          @id @default(autoincrement())
+  name        String
+  rating      Int          // 1–5
+  body        String
+  isPublished Boolean      @default(true)
+  inviteId    Int          @unique
+  invite      ReviewInvite @relation(fields: [inviteId], references: [id], onDelete: Restrict)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}

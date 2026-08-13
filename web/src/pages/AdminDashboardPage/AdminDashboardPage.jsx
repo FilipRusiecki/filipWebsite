@@ -8,6 +8,7 @@ import { motion } from 'framer-motion'
 
 import Navigation from 'src/components/Navigation/Navigation'
 import Footer from 'src/components/Footer/Footer'
+import AdminReviewsPanel from 'src/components/AdminReviewsPanel/AdminReviewsPanel'
 
 const TICKETS_QUERY = gql`
   query AdminTicketsQuery {
@@ -76,6 +77,7 @@ const AdminDashboardPage = () => {
   const [typeFilter, setTypeFilter] = useState('all')
   const [replyContent, setReplyContent] = useState('')
   const [showReplyForm, setShowReplyForm] = useState(false)
+  const [adminTab, setAdminTab] = useState('tickets') // tickets | reviews
   const hasNavigated = useRef(false)
 
   // Redirect if not authenticated or not admin (using useEffect to avoid render-time navigation)
@@ -213,6 +215,36 @@ const AdminDashboardPage = () => {
               </button>
             </div>
 
+            {/* Tabs */}
+            <div className="flex flex-wrap gap-3 mb-8">
+              <button
+                type="button"
+                onClick={() => setAdminTab('tickets')}
+                className={`px-5 py-2.5 rounded-lg font-bold transition-all ${
+                  adminTab === 'tickets'
+                    ? 'bg-game-accent text-game-dark'
+                    : 'border-2 border-game-accent/30 text-game-light hover:border-game-accent'
+                }`}
+              >
+                Tickets
+              </button>
+              <button
+                type="button"
+                onClick={() => setAdminTab('reviews')}
+                className={`px-5 py-2.5 rounded-lg font-bold transition-all ${
+                  adminTab === 'reviews'
+                    ? 'bg-game-accent text-game-dark'
+                    : 'border-2 border-game-accent/30 text-game-light hover:border-game-accent'
+                }`}
+              >
+                Reviews
+              </button>
+            </div>
+
+            {adminTab === 'reviews' ? (
+              <AdminReviewsPanel />
+            ) : (
+              <>
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
               <div className="bg-game-dark border-2 border-game-accent/30 rounded-lg p-6">
@@ -509,6 +541,8 @@ const AdminDashboardPage = () => {
                 )}
               </div>
             </div>
+              </>
+            )}
           </div>
         </div>
         <Footer />
