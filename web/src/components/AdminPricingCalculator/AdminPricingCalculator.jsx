@@ -156,6 +156,7 @@ const AdminPricingCalculator = ({ loadProjectId = null, onProjectLoaded }) => {
   const [state, setState] = useState(defaultState)
   const [hydrated, setHydrated] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [pdfBusy, setPdfBusy] = useState(false)
   const [savedProjectId, setSavedProjectId] = useState(null)
   const [projectStatus, setProjectStatus] = useState('quote')
   const [paymentStatus, setPaymentStatus] = useState('unpaid')
@@ -627,6 +628,86 @@ const AdminPricingCalculator = ({ loadProjectId = null, onProjectLoaded }) => {
       setTimeout(() => setCopied(false), 2000)
     } catch {
       // ignore
+    }
+  }
+
+  const downloadReceiptPdf = async () => {
+    const el = document.getElementById('client-quote-sheet')
+    if (!el) return
+    setPdfBusy(true)
+    try {
+      const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
+        import('html2canvas'),
+        import('jspdf'),
+      ])
+
+      const canvas = await html2canvas(el, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        onclone: (clonedDoc) => {
+          const cloned = clonedDoc.getElementById('client-quote-sheet')
+          if (!cloned) return
+          cloned.style.background = '#ffffff'
+          cloned.style.color = '#111111'
+          cloned.style.boxShadow = 'none'
+          cloned.querySelectorAll('*').forEach((node) => {
+            if (!(node instanceof HTMLElement)) return
+            const cls = typeof node.className === 'string' ? node.className : ''
+            if (cls.includes('text-green-')) {
+              node.style.color = '#15803d'
+            } else if (cls.includes('text-game-accent')) {
+              node.style.color = '#1a1a1a'
+            } else if (cls.includes('text-game-light')) {
+              node.style.color = cls.includes('/') ? '#555555' : '#222222'
+            }
+            if (cls.includes('border-game-accent') || cls.includes('border-green') || cls.includes('border-neutral')) {
+              node.style.borderColor = '#d4d4d4'
+            }
+            if (cls.includes('bg-green-')) {
+              node.style.background = '#f0fdf4'
+            }
+            if (cls.includes('bg-[')) {
+              node.style.background = '#ffffff'
+            }
+          })
+        },
+      })
+
+      const img = canvas.toDataURL('image/png')
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' })
+      const pageW = pdf.internal.pageSize.getWidth()
+      const pageH = pdf.internal.pageSize.getHeight()
+      const margin = 10
+      const usableW = pageW - margin * 2
+      const usableH = pageH - margin * 2
+      const imgW = usableW
+      const imgH = (canvas.height * imgW) / canvas.width
+
+      let heightLeft = imgH
+      let position = margin
+
+      pdf.addImage(img, 'PNG', margin, position, imgW, imgH)
+      heightLeft -= usableH
+
+      while (heightLeft > 0) {
+        position = margin - (imgH - heightLeft)
+        pdf.addPage()
+        pdf.addImage(img, 'PNG', margin, position, imgW, imgH)
+        heightLeft -= usableH
+      }
+
+      const who = (state.quoteClient || 'client').replace(/[^\w\- ]+/g, '').trim().slice(0, 40)
+      const kind = isPaidDoc ? 'receipt' : 'quote'
+      pdf.save(`FRVG-${kind}-${who || 'document'}.pdf`)
+    } catch (e) {
+      console.error(e)
+      setSaveMessage({
+        type: 'error',
+        text: 'Could not create PDF. Try again, or use Print with Headers/footers off.',
+      })
+    } finally {
+      setPdfBusy(false)
     }
   }
 
@@ -1379,6 +1460,14 @@ const AdminPricingCalculator = ({ loadProjectId = null, onProjectLoaded }) => {
             </button>
             <button
               type="button"
+              onClick={downloadReceiptPdf}
+              disabled={pdfBusy}
+              className="bg-green-500/90 text-game-dark px-4 py-2 rounded-lg text-sm font-bold hover:brightness-110 disabled:opacity-50"
+            >
+              {pdfBusy ? 'Making PDF…' : 'Download PDF'}
+            </button>
+            <button
+              type="button"
               onClick={() => window.print()}
               className="border border-game-accent/40 text-game-light px-4 py-2 rounded-lg text-sm font-bold hover:border-game-accent"
             >
@@ -1386,8 +1475,9 @@ const AdminPricingCalculator = ({ loadProjectId = null, onProjectLoaded }) => {
             </button>
           </div>
           <p className="w-full text-[11px] text-game-light/40 mt-1">
-            Print tip: in the print dialog, turn off “Headers and footers” so{' '}
-            <span className="font-mono">localhost:8910/…</span> doesn’t appear on the PDF.
+            Use <span className="text-game-light/60">Download PDF</span> to send clients a clean file
+            (no website URL footer). Browser Print always adds the page address unless you turn off
+            Headers and footers.
           </p>
         </div>
 
