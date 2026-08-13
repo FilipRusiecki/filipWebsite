@@ -1385,6 +1385,10 @@ const AdminPricingCalculator = ({ loadProjectId = null, onProjectLoaded }) => {
               Print
             </button>
           </div>
+          <p className="w-full text-[11px] text-game-light/40 mt-1">
+            Print tip: in the print dialog, turn off “Headers and footers” so{' '}
+            <span className="font-mono">localhost:8910/…</span> doesn’t appear on the PDF.
+          </p>
         </div>
 
         <div className="print:hidden grid grid-cols-1 md:grid-cols-3 gap-3 p-5 border-b border-game-accent/15">
