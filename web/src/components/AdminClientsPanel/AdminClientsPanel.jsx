@@ -208,6 +208,28 @@ const AdminClientsPanel = ({ onOpenInCalculator }) => {
   })
 
   const projects = data?.clientProjects || []
+
+  const earnings = useMemo(() => {
+    let earned = 0
+    let paidCount = 0
+    let pipeline = 0
+    let monthlyRecurring = 0
+
+    projects.forEach((p) => {
+      if (p.paymentStatus === 'paid_in_full') {
+        paidCount += 1
+        earned += Number(p.paidAmount != null ? p.paidAmount : p.oneTimeTotal) || 0
+      } else {
+        pipeline += Number(p.oneTimeTotal) || 0
+      }
+      if (p.status === 'active' && Number(p.monthlyTotal) > 0) {
+        monthlyRecurring += Number(p.monthlyTotal) || 0
+      }
+    })
+
+    return { earned, paidCount, pipeline, monthlyRecurring, totalProjects: projects.length }
+  }, [projects])
+
   const filtered = useMemo(() => {
     if (statusFilter === 'all') return projects
     if (statusFilter === 'due') {
@@ -259,6 +281,38 @@ const AdminClientsPanel = ({ onOpenInCalculator }) => {
               {s.label}
             </button>
           ))}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="sm:col-span-2 border-2 border-game-accent/40 rounded-lg p-4 md:p-5 bg-gradient-to-br from-game-accent/15 to-transparent shadow-[0_0_40px_-18px_rgba(209,173,74,0.45)]">
+          <p className="text-game-light/50 text-xs uppercase tracking-wider mb-1">
+            Total earned (paid in full)
+          </p>
+          <p className="text-3xl md:text-4xl font-bold text-game-accent tabular-nums">
+            {loading ? '…' : euro(earnings.earned)}
+          </p>
+          <p className="text-game-light/40 text-xs mt-2">
+            Just for you — from {earnings.paidCount} paid project
+            {earnings.paidCount === 1 ? '' : 's'}
+            {earnings.totalProjects
+              ? ` · ${earnings.totalProjects} saved total`
+              : ''}
+          </p>
+        </div>
+        <div className="border border-game-accent/25 rounded-lg p-4 bg-game-dark/50">
+          <p className="text-game-light/45 text-xs mb-1">Still in pipeline</p>
+          <p className="text-2xl font-bold text-game-light tabular-nums">
+            {loading ? '…' : euro(earnings.pipeline)}
+          </p>
+          <p className="text-game-light/35 text-xs mt-1">Unpaid quotes / projects</p>
+        </div>
+        <div className="border border-game-accent/25 rounded-lg p-4 bg-game-dark/50">
+          <p className="text-game-light/45 text-xs mb-1">Active monthly</p>
+          <p className="text-2xl font-bold text-game-light tabular-nums">
+            {loading ? '…' : `${euro(earnings.monthlyRecurring)}/mo`}
+          </p>
+          <p className="text-game-light/35 text-xs mt-1">From active retainers</p>
         </div>
       </div>
 
