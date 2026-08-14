@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useMutation } from '@redwoodjs/web'
 import { gql } from '@redwoodjs/web'
+import SaveTicketAccess from 'src/components/SaveTicketAccess/SaveTicketAccess'
 
 const CREATE_REPLY = gql`
   mutation CreateReplyMutation($input: CreateReplyInput!) {
@@ -111,9 +112,8 @@ const TicketView = ({ ticket, onUpdate }) => {
           )}
         </div>
 
-        <div className="bg-game-dark border border-game-accent/40 rounded-lg p-3 mb-4 text-sm text-game-light/80">
-          <span className="font-semibold text-game-accent">Reminder:</span>{' '}
-          Please save or bookmark this page's URL. You'll need this link to view your ticket and replies later.
+        <div className="mb-6">
+          <SaveTicketAccess ticketId={ticket.id} />
         </div>
 
         {/* Bug Report Specific Information */}

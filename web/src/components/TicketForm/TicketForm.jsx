@@ -209,6 +209,10 @@ const TicketForm = ({ onSuccess, ticketType = 'support' }) => {
       >
         {loading ? 'Submitting...' : isBusiness ? 'Submit Enquiry' : 'Submit Ticket'}
       </button>
+      <p className="text-center text-sm text-game-light/55">
+        After you submit, you&apos;ll get a private link. Save or bookmark that page — there is no
+        account to log back in with. Do not share the link with anyone.
+      </p>
     </form>
   )
 }
